@@ -4,7 +4,7 @@ import pckgMesGammes.Gamme;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map.Entry;
-import static pckgMesGammes.Gamme.GAMME_DO;
+import static pckgMesGammes.Gamme.CHROMATIQUE_DO;
 class Note {
     
     /**
@@ -167,7 +167,7 @@ class Note {
      ArrayList<String> value=null;
      boolean found=false;
      //on cree un iterateur pour parcourir le hashMap DEGRES_NOTES qui nous renvoie les couples <ton, tableau<>>
-     for( Iterator i= GAMME_DO.entrySet().iterator();i.hasNext()&&!found;){
+     for( Iterator i= CHROMATIQUE_DO.entrySet().iterator();i.hasNext()&&!found;){
          //recuperer l'element courant
         Entry<Double, ArrayList<String>> entry= (Entry<Double, ArrayList<String>>) i.next();
         //sa cle
@@ -194,7 +194,7 @@ class Note {
   public void note_by_ton_gamme(double ton) {
       //petite operéation pour etre sur de ne pas sortir du tableau de notes
       double myTon=ton%TONS_OCTAVE;
-      ArrayList<String> find=GAMME_DO.get(myTon);
+      ArrayList<String> find=CHROMATIQUE_DO.get(myTon);
       this.set_couleur(find.get(IDX_COULEUR));
       this.set_nom_e(find.get(IDX_NOM_E));
       this.set_nom_fr(find.get(IDX_NOM_FR));

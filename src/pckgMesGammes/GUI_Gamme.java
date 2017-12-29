@@ -49,7 +49,7 @@ public class GUI_Gamme extends javax.swing.JFrame {
 
         jLabel1.setText("Rechercher une gamme avec une note :");
 
-        cbNote.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbNote.setModel(new javax.swing.DefaultComboBoxModel<>(Gamme.note_chromatique_do()));
         cbNote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbNoteActionPerformed(evt);
@@ -57,6 +57,11 @@ public class GUI_Gamme extends javax.swing.JFrame {
         });
 
         btRechercheNote.setText("Rechercher");
+        btRechercheNote.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRechercheNoteActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Rechercher une gamme avec les dièses ou bémols :");
 
@@ -103,7 +108,7 @@ public class GUI_Gamme extends javax.swing.JFrame {
 
         jLabel5.setText("Sélectionner un mode :");
 
-        cbMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbMode.setModel(new javax.swing.DefaultComboBoxModel<>(Gamme.MODES_GAMMES));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,6 +211,7 @@ public class GUI_Gamme extends javax.swing.JFrame {
 
     private void cbNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNoteActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_cbNoteActionPerformed
 
     private void btAfficherDieseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAfficherDieseActionPerformed
@@ -213,10 +219,17 @@ public class GUI_Gamme extends javax.swing.JFrame {
     }//GEN-LAST:event_btAfficherDieseActionPerformed
 
     private void btRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRetourActionPerformed
-        // TODO add your handling code here:
         new MainMesGammes().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btRetourActionPerformed
+
+    private void btRechercheNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRechercheNoteActionPerformed
+        // TODO gerer l'affichage des notes dans le tableau
+        String note_select=(String)cbNote.getSelectedItem();
+        String mode=(String)cbMode.getSelectedItem();
+        Gamme gamme=new Gamme(note_select, mode);
+        System.err.println(gamme);
+    }//GEN-LAST:event_btRechercheNoteActionPerformed
 
     /**
      * @param args the command line arguments
