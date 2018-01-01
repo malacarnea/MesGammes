@@ -2,7 +2,6 @@
 package pckgMesGammes;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -11,7 +10,7 @@ class Gamme {
     /**
      * tableau des notes de la gamme
      */
-    protected HashMap<String, Note> notes_gamme;
+    protected TreeMap<String, Note> notes_gamme;
     /**
      * premiere note de la gamme
      */
@@ -61,6 +60,24 @@ class Gamme {
         put(new Double(5.5),new ArrayList(){{add("B"); add("Si");add("0x000000");}});
     }
   };
+  
+   /**
+   * tableau de forme <ton note, ArrayList<"nom_e", "nom_fr", "couleur">>qui contient les notes de Do à Si avec les dieses/bemols indexees de 0 à 11 
+   * on utilise un treeMap pour que les tons restent triés
+   */
+  public static final TreeMap<String, ArrayList<String>> LISTE_NOTES=new TreeMap<String, ArrayList<String>>(){
+    {
+        put("C",new ArrayList(){{ add("Do");add("0x000000");}});
+        put("C#",new ArrayList(){{ add("Do#");add("0x000000");}});
+        put("Db",new ArrayList(){{ add("Réb");add("0x000000");}});
+        put("D",new ArrayList(){{ add("Ré");add("0x000000");}});
+        put("D#",new ArrayList(){{ add("Ré#");add("0x000000");}});
+        put("Eb",new ArrayList(){{ add("Mib");add("0x000000");}});
+      
+    }
+  };
+  public static final String[] DIESES={"F", "C", "G", "D", "A", "E", "B"};
+  
 /********************************************************************************************************************/
     /**
      * constructeur
@@ -71,7 +88,7 @@ class Gamme {
     public Gamme(String fondamentale, String mode) {
         //on calcule les notes de la gamme en fonction de la fondamentale
         //trouver la note correspondant a la fondamentale
-        this.notes_gamme = new HashMap<>();
+        this.notes_gamme = new TreeMap<>();
         this.mode=mode;
         //creer 2 notes a partir de la chaine en param, une pour garder en memoire la fondamentale, une qu'on va modifier pour construire la gamme 
         this.fondamentale=new Note(fondamentale);
@@ -105,11 +122,11 @@ class Gamme {
         return mode;
     }
     
-    public final HashMap get_notes_gamme() {
+    public final TreeMap get_notes_gamme() {
         return notes_gamme;
     }
 
-    public void set_notes_gamme(HashMap table) {
+    public void set_notes_gamme(TreeMap table) {
         notes_gamme = table;
     }
 

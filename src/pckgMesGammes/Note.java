@@ -1,6 +1,5 @@
 
 package pckgMesGammes;
-import pckgMesGammes.Gamme;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map.Entry;
