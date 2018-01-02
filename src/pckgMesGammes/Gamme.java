@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.TreeMap;
+import static pckgMesGammes.Note.TONS_OCTAVE;
 
 class Gamme {
     /**
@@ -16,11 +17,12 @@ class Gamme {
      */
     protected Note fondamentale;
 
-    
+
     /**
      * mode de la gamme (majeur, mineur...)
      */
     protected String mode;
+    protected Armure armure;
     /**
      * tableau qui definit les tags Degré X
      */
@@ -35,49 +37,76 @@ class Gamme {
      * construire une gamme mineure naturelle
      */
     public static final double[] SCHEMA_MINEUR = {1.0, 0.5, 1.0, 1.0, 0.5, 1.0, 1.0};
-    /**
-     * definition des modes de gammes
-     */
-    public static final String[] MODES_GAMMES = {"MAJEUR", "MINEUR"};
     
    /**
-   * tableau de forme <ton note, ArrayList<"nom_e", "nom_fr", "couleur">>qui contient les notes de Do à Si avec les dieses/bemols indexees de 0 à 11 
+   * tableau de forme <ton note, ArrayList<"nom_e", "nom_fr", "couleur">>qui contient les notes de Do à Si avec les dieses/bemols indexees de 0 à 11
    * on utilise un treeMap pour que les tons restent triés
    */
   public static final TreeMap<Double, ArrayList<String>> CHROMATIQUE_DO=new TreeMap<Double, ArrayList<String>>(){
     {
-        put(new Double(0),new ArrayList(){{add("C"); add("Do");add("0x000000");}});
-        put(new Double(0.5),new ArrayList(){{add("C#/Db"); add("Do#/Réb");add("0x000000");}});
-        put(new Double(1),new ArrayList(){{add("D"); add("Ré");add("0x000000");}});
-        put(new Double(1.5),new ArrayList(){{add("D#/Eb"); add("Ré#/Mib");add("0x000000");}});
-        put(new Double(2),new ArrayList(){{add("E"); add("Mi");add("0x000000");}});
-        put(new Double(2.5),new ArrayList(){{add("F"); add("Fa");add("0x000000");}});
-        put(new Double(3),new ArrayList(){{add("F#/Gb"); add("Fa#/Solb");add("0x000000");}});
-        put(new Double(3.5),new ArrayList(){{add("G"); add("Sol");add("0x000000");}});  
-        put(new Double(4),new ArrayList(){{add("G#/Ab"); add("Sol#/Lab");add("0x000000");}});
-        put(new Double(4.5),new ArrayList(){{add("A"); add("La");add("0x000000");}});
-        put(new Double(5),new ArrayList(){{add("A#/Bb"); add("La#/Sib");add("0x000000");}});
-        put(new Double(5.5),new ArrayList(){{add("B"); add("Si");add("0x000000");}});
+        put(new Double(0),new ArrayList(){{add("C");add("B#");}});
+        put(new Double(0.5),new ArrayList(){{add("C#"); add("Db");}});
+        put(new Double(1),new ArrayList(){{add("D");}});
+        put(new Double(1.5),new ArrayList(){{add("D#"); add("Eb");}});
+        put(new Double(2),new ArrayList(){{add("E");add("Fb");}});
+        put(new Double(2.5),new ArrayList(){{add("F");add("E#");}});
+        put(new Double(3),new ArrayList(){{add("F#"); add("Gb");}});
+        put(new Double(3.5),new ArrayList(){{add("G"); }});
+        put(new Double(4),new ArrayList(){{add("G#"); add("Ab");}});
+        put(new Double(4.5),new ArrayList(){{add("A");}});
+        put(new Double(5),new ArrayList(){{add("A#"); add("Bb");}});
+        put(new Double(5.5),new ArrayList(){{add("B");add("Cb");}});
     }
   };
-  
+
    /**
-   * tableau de forme <ton note, ArrayList<"nom_e", "nom_fr", "couleur">>qui contient les notes de Do à Si avec les dieses/bemols indexees de 0 à 11 
-   * on utilise un treeMap pour que les tons restent triés
+   * tableau de forme <mode, <armure,<note, img>>> mode : string, note:le nom de la note en anglais, armure: un entier
+   * qui donne le nombre de dieses si positif et le nombre de bemols si negatif, img:adresse de l'image representant l'armure (cle de sol)
+   * définit les modes des gammes et les toniques qu'on peut trouver dedans
    */
-  public static final TreeMap<String, ArrayList<String>> LISTE_NOTES=new TreeMap<String, ArrayList<String>>(){
-    {
-        put("C",new ArrayList(){{ add("Do");add("0x000000");}});
-        put("C#",new ArrayList(){{ add("Do#");add("0x000000");}});
-        put("Db",new ArrayList(){{ add("Réb");add("0x000000");}});
-        put("D",new ArrayList(){{ add("Ré");add("0x000000");}});
-        put("D#",new ArrayList(){{ add("Ré#");add("0x000000");}});
-        put("Eb",new ArrayList(){{ add("Mib");add("0x000000");}});
-      
-    }
-  };
-  public static final String[] DIESES={"F", "C", "G", "D", "A", "E", "B"};
-  
+    public static final TreeMap<String, TreeMap<String, Armure>> MODES_GAMMES = new TreeMap<String, TreeMap<String, Armure>>() {
+        {
+            put("MAJEUR", new TreeMap() {
+                {
+                    put("Cb", new Armure("b", 7));
+                    put("Gb", new Armure("b", 6));
+                    put("Db", new Armure("b", 5));
+                    put("Ab", new Armure("b", 4));
+                    put("Eb", new Armure("b", 3));
+                    put("Bb", new Armure("b", 2));
+                    put("F", new Armure("b", 1));
+                    put("C", new Armure("b", 0));
+                    put("G", new Armure("#", 1));
+                    put("D", new Armure("#", 2));
+                    put("A", new Armure("#", 3));
+                    put("E", new Armure("#", 4));
+                    put("B", new Armure("#", 5));
+                    put("F#", new Armure("#", 6));
+                    put("C#", new Armure("#", 7));
+                }
+            });
+             put("MINEUR", new TreeMap() {
+                {
+                    put("Ab", new Armure("b", 7));
+                    put("Eb", new Armure("b", 6));
+                    put("Bb", new Armure("b", 5));
+                    put("F", new Armure("b", 4));
+                    put("C", new Armure("b", 3));
+                    put("G", new Armure("b", 2));
+                    put("D", new Armure("b", 1));
+                    put("A", new Armure("b", 0));
+                    put("E", new Armure("#", 1));
+                    put("B", new Armure("#", 2));
+                    put("F#", new Armure("#", 3));
+                    put("C#", new Armure("#", 4));
+                    put("G#", new Armure("#", 5));
+                    put("D#", new Armure("#", 6));
+                    put("A#", new Armure("#", 7));
+                }
+            });
+        }
+    };
+
 /********************************************************************************************************************/
     /**
      * constructeur
@@ -90,7 +119,8 @@ class Gamme {
         //trouver la note correspondant a la fondamentale
         this.notes_gamme = new TreeMap<>();
         this.mode=mode;
-        //creer 2 notes a partir de la chaine en param, une pour garder en memoire la fondamentale, une qu'on va modifier pour construire la gamme 
+        this.armure=MODES_GAMMES.get(mode).get(fondamentale);
+        //creer 2 notes a partir de la chaine en param, une pour garder en memoire la fondamentale, une qu'on va modifier pour construire la gamme
         this.fondamentale=new Note(fondamentale);
         Note note = new Note(fondamentale);
         double[] schema={};
@@ -105,7 +135,7 @@ class Gamme {
         //calcule de la gamme
         this.calcule_gamme(note, schema);
     }
-    
+
     /**
      * getter de fondamentale
      * @return Note
@@ -121,7 +151,7 @@ class Gamme {
     public String get_mode() {
         return mode;
     }
-    
+
     public final TreeMap get_notes_gamme() {
         return notes_gamme;
     }
@@ -144,22 +174,46 @@ class Gamme {
     public void set_mode(String mode) {
         this.mode = mode;
     }
-    
+
     /*****************************Methodes *************************************/
     /**
      * renvoie un tableau de note correspondant à la gamme, a recuperer dans le
      * constructeur de la gamme enfant
      */
-    public void calcule_gamme(Note note, double[] schema) {
-          for(int i=0; i<DEGRES.length; i++){
-          //ajouter note au tableau de la gamme
-          this.add_note_gamme(DEGRES[i], new Note(note.get_ton_gamme()));
-          double c_ton=note.get_ton_gamme()+schema[i];
-          //on modifie la note courante en fonction du ton dans le tableau
-          note.note_by_ton_gamme(c_ton);
-      }
+    public final void calcule_gamme(Note note, double[] schema) {
+        for (int i = 0; i < DEGRES.length; i++) {
+            //ajouter note au tableau de la gamme
+            this.add_note_gamme(DEGRES[i], new Note(note.get_nom_e()));
+            double c_ton = note.get_ton_gamme() + schema[i];
+            //on modifie la note courante en fonction du ton dans le tableau
+            this.note_by_ton_gamme(c_ton, note);
+        }
     }
+    /**
+   * modifie la note correspondant au ton recherche
+   * @param double ton
+   */
+  public void note_by_ton_gamme(double ton, Note note) {
+      //petite operéation pour etre sur de ne pas sortir du tableau de notes
+      double myTon=ton%TONS_OCTAVE;
+      String newNote="";
+      ArrayList<String> notes=CHROMATIQUE_DO.get(myTon);
+      //ici il faut verifier laquelle des notes recuperees dans CHROMATIQUE_DO 
+      //si une des notes est dans l'armure, on l'ajoute a la gamme, sinon on regarde celle qui n'a pas d'alteration
+      for(String laNote:notes){
+          if(this.armure.is_in_armure(laNote)){
+              newNote=laNote;
+          }else{
+              if(laNote.length()==1){
+                newNote=laNote;
+              }
+          }
+      }
+      note.note_by_nom(newNote);
+      
+  }
 
+ 
     /**
      * ajoute une note dans le tableau de la gamme [I, II, III, IV...], on
      * compte le nombre d'elements dans notes_gamme et on ajoute
@@ -172,17 +226,35 @@ class Gamme {
     }
 
     /**
-     * fonction qui renvoie la liste des notes de la gamme chromatique
+     * fonction qui renvoie la liste des modes de gamme possibles
      * @return String[]
      */
-    public static String[] note_chromatique_do(){
-        Iterator it=CHROMATIQUE_DO.entrySet().iterator();
-        int size=CHROMATIQUE_DO.size();
+    public static String[] modes_gamme(){
+        Iterator it=MODES_GAMMES.entrySet().iterator();
+        int size=MODES_GAMMES.size();
         String res[]=new String[size];
         int cpt=0;
         while(it.hasNext()){
-            Entry<Double, ArrayList<String>> entry= (Entry<Double, ArrayList<String>>) it.next();
-            res[cpt]= entry.getValue().get(Note.IDX_NOM_E);
+            Entry<String, TreeMap<String, ArrayList<String>>> entry= (Entry<String, TreeMap<String, ArrayList<String>>>) it.next();
+            res[cpt]= entry.getKey();
+            cpt++;
+        }
+        return res;
+    }
+    
+    /**
+     * fonction qui renvoie la liste des notes possibles pour un mode
+     * @param String mode
+     * @return String[]
+     */
+    public static String[] bases_mode(String mode){
+         Iterator it=MODES_GAMMES.get(mode).entrySet().iterator();
+        int size=MODES_GAMMES.get(mode).size();
+        String res[]=new String[size];
+        int cpt=0;
+        while(it.hasNext()){
+            Entry<String, ArrayList<String>> entry= (Entry<String, ArrayList<String>>) it.next();
+            res[cpt]= entry.getKey();
             cpt++;
         }
         return res;
@@ -199,10 +271,8 @@ class Gamme {
         return toReturn + "\n";
     }
     public static void main(String args[]){
-//        Gamme g=new Gamme("A", "MINEUR");
-        for(String s:Gamme.note_chromatique_do()){
-             System.out.println(s+", ");
-        }
-       
+        Gamme g=new Gamme("G", "MAJEUR");
+       System.out.println(g);
+
     }
 }

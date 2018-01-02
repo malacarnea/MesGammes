@@ -1,11 +1,13 @@
-
 package pckgMesGammes;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 import static pckgMesGammes.Gamme.CHROMATIQUE_DO;
+
 class Note {
-    
+
     /**
      * nom de la note (Do, Ré, Mi...)
      */
@@ -37,26 +39,110 @@ class Note {
      * constante definissant la valeur d'une octave en tons
      */
     public static final double TONS_OCTAVE = 6.0;
+    /**
+     * tableau qui denifit la correspondance entre la note anglaise et la note
+     * française
+     */
+    public static final TreeMap<String, String> TRADUCTION_NOTES = new TreeMap<String, String>() {
+        {
+            put("C", "Do");
+            put("D", "Ré");
+            put("E", "Mi");
+            put("F", "Fa");
+            put("G", "Sol");
+            put("A", "La");
+            put("B", "Si");
+        }
+    };
 
     /**
-     * constante definissant la valeur d'un index nom_e
+     * tableau qui denifit la couleur des notes
      */
-    public static final int IDX_NOM_E = 0;
+    public static final TreeMap<String, ArrayList<String>> COULEUR_NOTES = new TreeMap<String, ArrayList<String>>() {
+        {
+            put("ROUGE", new ArrayList() {
+                {
+                    add("C");
+                    add("B#");
+                }
+            });
+            put("VIOLET", new ArrayList() {
+                {
+                    add("C#");
+                    add("Db");
+                }
+            });
+            put("VERT", new ArrayList() {
+                {
+                    add("D");
+                }
+            });
+            put("JAUNE", new ArrayList() {
+                {
+                    add("D#");
+                    add("Eb");
+                }
+            });
+            put("BLEU", new ArrayList() {
+                {
+                    add("E");
+                }
+            });
+            put("ROSE", new ArrayList() {
+                {
+                    add("E#");
+                    add("F");
+                }
+            });
+            put("ORANGE", new ArrayList() {
+                {
+                    add("F#");
+                    add("Gb");
+                }
+            });
+            put("BLEU_CIEL", new ArrayList() {
+                {
+                    add("G");
+                }
+            });
+            put("MARRON", new ArrayList() {
+                {
+                    add("G#");
+                    add("Ab");
+                }
+            });
+            put("VERT_CLAIR", new ArrayList() {
+                {
+                    add("A");
+                }
+            });
+            put("GRIS", new ArrayList() {
+                {
+                    add("A#");
+                    add("Bb");
+                }
+            });
+            put("BLANC", new ArrayList() {
+                {
+                    add("B");
+                    add("Cb");
+                }
+            });
+        }
+    };
+
     /**
-     * constante definissant la valeur d'un index nom_fr
+     * *************************************************************************
      */
-    public static final int IDX_NOM_FR = 1;
     /**
-     * constante definissant la valeur d'un index nom_couleur
+     * ****************** COnstructeurs ****************************************
      */
-    public static final int IDX_COULEUR = 2;
-  
- 
-  /****************************************************************************/
-  /******************** COnstructeurs *****************************************/
-  /****************************************************************************/
+    /**
+     * *************************************************************************
+     */
     /**
      * constructeur
+     *
      * @param nom_fr string
      * @param nom_e string
      * @param couleur string
@@ -79,180 +165,235 @@ class Note {
     }
 
     /**
-     * constructeur avec le ton
-     *
-     * @param ton double
+     * *************************************************************************
      */
-    public Note(Double ton) {
-        this.note_by_ton_gamme(ton);
-    }
-  /****************************************************************************/
-  /************************** Getters *****************************************/
-  /****************************************************************************/
+    /**
+     * ************************ Getters ****************************************
+     */
+    /**
+     * *************************************************************************
+     */
     /**
      * getter de nom_fr
+     *
      * @return String nom_fr
      */
     public String get_nom_fr() {
         return nom_fr;
     }
-    
-     /**
+
+    /**
      * getter de nom_e
+     *
      * @return String nom_e
      */
     public String get_nom_e() {
         return nom_e;
     }
-    
-     /**
+
+    /**
      * getter de couleur
+     *
      * @return String couleur
      */
     public String get_couleur() {
         return couleur;
     }
-    
-     /**
+
+    /**
      * getter de nom_fr
+     *
      * @return String nom_fr
      */
     public double get_ton_gamme() {
         return ton_gamme;
     }
-    /****************************************************************************/
-  /************************** Setters *****************************************/
-  /****************************************************************************/
-    
-     /**
+
+    /**
+     * *************************************************************************
+     */
+    /**
+     * ************************ Setters ****************************************
+     */
+    /**
+     * *************************************************************************
+     */
+
+    /**
      * setter de ton_gamme
+     *
      * @param ton_gamme double
      */
     public void set_ton_gamme(double ton_gamme) {
         this.ton_gamme = ton_gamme;
     }
 
-     /**
+    /**
      * setter de nom_fr
+     *
      * @param nom_fr String
      */
     public void set_nom_fr(String nom_fr) {
         this.nom_fr = nom_fr;
     }
-     /**
+
+    /**
      * setter de nom_e
+     *
      * @param nom_e String
      */
     public void set_nom_e(String nom_e) {
         this.nom_e = nom_e;
     }
+
     /**
      * setter de couleur
+     *
      * @param couleur String
      */
     public void set_couleur(String couleur) {
         this.couleur = couleur;
     }
-    
-  /****************************************************************************/
-  /************************* Methodes *****************************************/
-  /****************************************************************************/
-  /**
-   * modifie la note recherchee en fonction de son nom anglais pour que ce soit plus simple a chercher
-   * @param note String en anglais
-   */
-  public void note_by_nom(String note) {
-     double key=0;
-     ArrayList<String> value=null;
-     boolean found=false;
-     //on cree un iterateur pour parcourir le hashMap DEGRES_NOTES qui nous renvoie les couples <ton, tableau<>>
-     for( Iterator i= CHROMATIQUE_DO.entrySet().iterator();i.hasNext()&&!found;){
-         //recuperer l'element courant
-        Entry<Double, ArrayList<String>> entry= (Entry<Double, ArrayList<String>>) i.next();
-        //sa cle
-        key=(double) entry.getKey();
-        //sa valeur (le tableau <"nom_e", "nom_fr", "couleur">)
-        value=(ArrayList<String>)entry.getValue();
-        //on regarde si ce tableau contient la note recherchee
-        if(value.contains(note)){
-            found=true;
-        }
-     }
-     //comme les derniers key et value contiennent forcement les valeurs de la note recherchee, on met a jour les attributs avec les valeurs trouvees
-     this.set_ton_gamme(key);
-     this.set_nom_e(value.get(IDX_NOM_E));
-     this.set_nom_fr(value.get(IDX_NOM_FR));
-     this.set_couleur(value.get(IDX_COULEUR));
-  }
-  
-
-  /**
-   * modifie la note correspondant au ton recherche
-   * @param double ton
-   */
-  public void note_by_ton_gamme(double ton) {
-      //petite operéation pour etre sur de ne pas sortir du tableau de notes
-      double myTon=ton%TONS_OCTAVE;
-      ArrayList<String> find=CHROMATIQUE_DO.get(myTon);
-      this.set_couleur(find.get(IDX_COULEUR));
-      this.set_nom_e(find.get(IDX_NOM_E));
-      this.set_nom_fr(find.get(IDX_NOM_FR));
-      this.set_ton_gamme(myTon);
-  }
-  
-  /**
-   * fonction qui renvoie la valeur du ton superieur pour la note courante en prenant en compte les octaves
-   * @return double
-   */
-  public double ton_sup(){
-      return (this.ton_gamme+TON)%TONS_OCTAVE;
-  }
-  
-  /**
-   * fonction qui renvoie la valeur du ton inferieur pour la note courante en prenant en compte les octaves
-   * @return double
-   */
-  public double ton_inf(){
-      return (this.ton_gamme-TON+TONS_OCTAVE)%TONS_OCTAVE;
-  }
 
     /**
-   * fonction qui renvoie la valeur du  demiton superieur pour la note courante en prenant en compte les octaves
-   * @return double
-   */
-  public double demi_ton_sup(){
-      return (this.ton_gamme+DEMI_TON)%TONS_OCTAVE;
-  }
-  
-  /**
-   * fonction qui renvoie la valeur du demi ton inferieur pour la note courante en prenant en compte les octaves
-   * @return double
-   */
-  public double demi_ton_inf(){
-      return (this.ton_gamme-DEMI_TON+TONS_OCTAVE)%TONS_OCTAVE;
-  }
+     * *************************************************************************
+     */
+    /**
+     * *********************** Methodes ****************************************
+     */
+    /**
+     * *************************************************************************
+     */
+    /**
+     * modifie la note recherchee en fonction de son nom anglais pour que ce
+     * soit plus simple a chercher
+     *
+     * @param note String en anglais
+     */
+    public void note_by_nom(String note) {
+        double key = 0;
+        ArrayList<String> value = null;
+        boolean found = false;
+        //on cree un iterateur pour parcourir le hashMap DEGRES_NOTES qui nous renvoie les couples <ton, tableau<>>
+        for (Iterator i = CHROMATIQUE_DO.entrySet().iterator(); i.hasNext() && !found;) {
+            //recuperer l'element courant
+            Entry<Double, ArrayList<String>> entry = (Entry<Double, ArrayList<String>>) i.next();
+            //sa cle
+            key = (double) entry.getKey();
+            //sa valeur (le tableau <"nom_e", "nom_fr", "couleur">)
+            value = (ArrayList<String>) entry.getValue();
+            //on regarde si ce tableau contient la note recherchee
+            if (value.contains(note)) {
+                found = true;
+            }
+        }
+        //comme les derniers key et value contiennent forcement les valeurs de la note recherchee, on met a jour les attributs avec les valeurs trouvees
+        this.set_ton_gamme(key);
+        //TODO refaire en fonction des nouveaux tableaux
+        this.set_nom_e(note);
+        this.set_nom_fr(this.search_nom_fr(note));
+        this.set_couleur(this.search_couleur(note));
+    }
 
-  
-  @Override
+    /**
+     * fonction qui permet de rechercher dans le tableau TRADUCTION_NOTES le nom
+     * français de la note passee en parametre
+     *
+     * @param String nom_e
+     * @return String nom_fr
+     */
+    public String search_nom_fr(String nom_e) {
+        //gerer le diese et le bemol, on sait qu'il faut chercher le premier caractere
+        String toSrch = nom_e.substring(0, 1);
+        Iterator it = TRADUCTION_NOTES.entrySet().iterator();
+        String note = "";
+        String fr = "";
+        while (it.hasNext() && !note.equals(toSrch)) {
+            Entry entry = (Entry) it.next();
+            note = (String) entry.getKey();
+            fr = (String) entry.getValue();
+        }
+        //rajouter les caracteres qu'on a enleve
+        return fr.concat(nom_e.substring(1));
+    }
+
+    /**
+     * fonction qui permet de rechercher dans le tableau COULEUR_NOTES la
+     * couleur correspondant a la note anglaise passee en parametre
+     *
+     * @param String nom_e
+     * @return String couleur
+     */
+    public String search_couleur(String nom_e) {
+        Iterator it = COULEUR_NOTES.entrySet().iterator();
+        String color = "";
+        ArrayList<String> list = null;
+        boolean find = false;
+        while (it.hasNext() && !find) {
+            Entry entry = (Entry) it.next();
+            color = (String) entry.getKey();
+            list = (ArrayList<String>) entry.getValue();
+            if (list.contains(nom_e)) {
+                find = true;
+            }
+        }
+        return color;
+    }
+
+    /**
+     * fonction qui renvoie la valeur du ton superieur pour la note courante en
+     * prenant en compte les octaves
+     *
+     * @return double
+     */
+    public double ton_sup() {
+        return (this.ton_gamme + TON) % TONS_OCTAVE;
+    }
+
+    /**
+     * fonction qui renvoie la valeur du ton inferieur pour la note courante en
+     * prenant en compte les octaves
+     *
+     * @return double
+     */
+    public double ton_inf() {
+        return (this.ton_gamme - TON + TONS_OCTAVE) % TONS_OCTAVE;
+    }
+
+    /**
+     * fonction qui renvoie la valeur du demiton superieur pour la note courante
+     * en prenant en compte les octaves
+     *
+     * @return double
+     */
+    public double demi_ton_sup() {
+        return (this.ton_gamme + DEMI_TON) % TONS_OCTAVE;
+    }
+
+    /**
+     * fonction qui renvoie la valeur du demi ton inferieur pour la note
+     * courante en prenant en compte les octaves
+     *
+     * @return double
+     */
+    public double demi_ton_inf() {
+        return (this.ton_gamme - DEMI_TON + TONS_OCTAVE) % TONS_OCTAVE;
+    }
+
+    @Override
     public String toString() {
-        String res="---------- NOTE ----------"
-                + "\nF : "+this.nom_e+
-                "\nEN : "+this.nom_fr+
-                "\nTON : "+this.ton_gamme+
-                "\nCouleur : "+this.couleur+
-                "\n-----------------------------";
+        String res = "---------- NOTE ----------"
+                + "\nEN : " + this.nom_e
+                + "\nF : " + this.nom_fr
+                + "\nTON : " + this.ton_gamme
+                + "\nCouleur : " + this.couleur
+                + "\n-----------------------------";
         return res;
     }
-    
+
     public static void main(String args[]) {
-        Note note=new Note(6.0);
-        System.out.println(note);
-        double sup=note.demi_ton_sup();
-        double inf=note.demi_ton_inf();
-        Note s=new Note(sup);
-        Note i=new Note(inf);
-        System.out.println("ton sup : "+ s);
-        System.out.println("ton inf : "+ i);
+        Note note = new Note("G#");
+        System.err.println(note);
     }
 
 }
