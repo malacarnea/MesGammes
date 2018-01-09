@@ -1,6 +1,9 @@
 
 package pckgMesGammes;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 class Armure {
   /**
    * typre d'alteration (bemol ou diese ou becare) {b, #, ?}
@@ -106,10 +109,43 @@ class Armure {
         return res;
     }
     
-    public static void main(String args[]) {
+   
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.alteration);
+        hash = 67 * hash + this.nb_alte;
+        hash = 67 * hash + Arrays.deepHashCode(this.armure);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Armure other = (Armure) obj;
+        if (this.nb_alte != other.nb_alte) {
+            return false;
+        }
+        if (!Objects.equals(this.alteration, other.alteration)) {
+            return false;
+        }
+        if (!Arrays.deepEquals(this.armure, other.armure)) {
+            return false;
+        }
+        return true;
+    }
+   
+     public static void main(String args[]) {
         Armure armure = new Armure("b",3);
         System.err.println(armure);
     }
-    
-    
 }

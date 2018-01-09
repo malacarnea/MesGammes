@@ -3,6 +3,7 @@ package pckgMesGammes;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 import static pckgMesGammes.Note.TONS_OCTAVE;
@@ -64,18 +65,11 @@ class Gamme {
    * qui donne le nombre de dieses si positif et le nombre de bemols si negatif, img:adresse de l'image representant l'armure (cle de sol)
    * définit les modes des gammes et les toniques qu'on peut trouver dedans
    */
-    public static final TreeMap<String, TreeMap<String, Armure>> MODES_GAMMES = new TreeMap<String, TreeMap<String, Armure>>() {
+    public static final TreeMap<String, LinkedHashMap<String, Armure>> MODES_GAMMES = new TreeMap<String, LinkedHashMap<String, Armure>>() {
         {
-            put("MAJEUR", new TreeMap() {
-                {
-                    put("Cb", new Armure("b", 7));
-                    put("Gb", new Armure("b", 6));
-                    put("Db", new Armure("b", 5));
-                    put("Ab", new Armure("b", 4));
-                    put("Eb", new Armure("b", 3));
-                    put("Bb", new Armure("b", 2));
-                    put("F", new Armure("b", 1));
-                    put("C", new Armure("b", 0));
+            put("MAJEUR", new LinkedHashMap() {
+                {  
+                    put("C", new Armure("#", 0));
                     put("G", new Armure("#", 1));
                     put("D", new Armure("#", 2));
                     put("A", new Armure("#", 3));
@@ -83,18 +77,18 @@ class Gamme {
                     put("B", new Armure("#", 5));
                     put("F#", new Armure("#", 6));
                     put("C#", new Armure("#", 7));
+                    put("Cb", new Armure("b", 7));
+                    put("Gb", new Armure("b", 6));
+                    put("Db", new Armure("b", 5));
+                    put("Ab", new Armure("b", 4));
+                    put("Eb", new Armure("b", 3));
+                    put("Bb", new Armure("b", 2));
+                    put("F", new Armure("b", 1));
                 }
             });
-             put("MINEUR", new TreeMap() {
+             put("MINEUR", new LinkedHashMap() {
                 {
-                    put("Ab", new Armure("b", 7));
-                    put("Eb", new Armure("b", 6));
-                    put("Bb", new Armure("b", 5));
-                    put("F", new Armure("b", 4));
-                    put("C", new Armure("b", 3));
-                    put("G", new Armure("b", 2));
-                    put("D", new Armure("b", 1));
-                    put("A", new Armure("b", 0));
+                    put("A", new Armure("#", 0));
                     put("E", new Armure("#", 1));
                     put("B", new Armure("#", 2));
                     put("F#", new Armure("#", 3));
@@ -102,6 +96,13 @@ class Gamme {
                     put("G#", new Armure("#", 5));
                     put("D#", new Armure("#", 6));
                     put("A#", new Armure("#", 7));
+                    put("Ab", new Armure("b", 7));
+                    put("Eb", new Armure("b", 6));
+                    put("Bb", new Armure("b", 5));
+                    put("F", new Armure("b", 4));
+                    put("C", new Armure("b", 3));
+                    put("G", new Armure("b", 2));
+                    put("D", new Armure("b", 1));
                 }
             });
         }
@@ -243,7 +244,8 @@ class Gamme {
     }
     
     /**
-     * fonction qui renvoie la liste des notes possibles pour un mode
+     * fonction qui renvoie la liste des notes possibles pour un mode pour alimenter les
+     * listes deroulantes de notes
      * @param String mode
      * @return String[]
      */
@@ -259,7 +261,45 @@ class Gamme {
         }
         return res;
     }
+    
+    /**
+     * fonction qui recupere les armures a partir de la gamme majeure pour alimenter la liste deroulante
+     * du GUI
+     * @return String[]
+     */
+    public static String[] armures_choices(){
+        Iterator it=MODES_GAMMES.get("MAJEUR").entrySet().iterator();
+        String[] res=new String[MODES_GAMMES.get("MAJEUR").size()];
+        int i=0;
+        while(it.hasNext()){
+            Entry entry=(Entry) it.next();
+            Armure armure=(Armure) entry.getValue();
+            res[i]=armure.getNb_alte()+" "+armure.getAlteration();
+            i++;
+        }
+        return res;
+    }
+    /**
+     * fonction qui renvoie la note correspondante a l'armure et au mode passes en param
+     * @param String mode de la gamme
+     * @param Armure armureToSrch
+     * @return String
+     */
+    public static String find_note_by_armure(String mode, Armure armureToSrch) {
+        String note = "";
+        //maintenant, on recherche la note (string) correspondant à l'armure selectionnee
+        Iterator it = Gamme.MODES_GAMMES.get(mode).entrySet().iterator();
+        boolean find = false;
+        while (it.hasNext() && !find) {
+            Entry entry = (Entry) it.next();
+            note = (String) entry.getKey();
+            Armure armureTemp = (Armure) entry.getValue();
+            find = armureToSrch.equals(armureTemp);
+        }
+        return note;
+    }
 
+    
     @Override
     public String toString() {
         String toReturn = "/*************** GAMME "+this.fondamentale.get_nom_fr()+" "+this.mode+" ******************/\n";
@@ -270,9 +310,12 @@ class Gamme {
 
         return toReturn + "\n";
     }
+    
+    
     public static void main(String args[]){
         Gamme g=new Gamme("G", "MAJEUR");
-       System.out.println(g);
+        String note=Gamme.find_note_by_armure("MINEUR", new Armure("#", 3));
+       System.out.println(note);
 
     }
 }
