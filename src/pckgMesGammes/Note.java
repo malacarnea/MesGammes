@@ -2,8 +2,8 @@ package pckgMesGammes;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 import static pckgMesGammes.Gamme.CHROMATIQUE_DO;
 
 class Note {
@@ -43,7 +43,7 @@ class Note {
      * tableau qui denifit la correspondance entre la note anglaise et la note
      * française
      */
-    public static final TreeMap<String, String> TRADUCTION_NOTES = new TreeMap<String, String>() {
+    public static final LinkedHashMap<String, String> TRADUCTION_NOTES = new LinkedHashMap<String, String>() {
         {
             put("C", "Do");
             put("D", "Ré");
@@ -58,7 +58,7 @@ class Note {
     /**
      * tableau qui denifit la couleur des notes
      */
-    public static final TreeMap<String, ArrayList<String>> COULEUR_NOTES = new TreeMap<String, ArrayList<String>>() {
+    public static final LinkedHashMap<String, ArrayList<String>> COULEUR_NOTES = new LinkedHashMap<String, ArrayList<String>>() {
         {
             put("ROUGE", new ArrayList() {
                 {

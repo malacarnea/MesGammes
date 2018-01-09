@@ -23,6 +23,10 @@ class Gamme {
      * mode de la gamme (majeur, mineur...)
      */
     protected String mode;
+    
+    /**
+     * armure correspondant a la gamme
+     */
     protected Armure armure;
     /**
      * tableau qui definit les tags Degré X
@@ -174,6 +178,14 @@ class Gamme {
      */
     public void set_mode(String mode) {
         this.mode = mode;
+    }
+
+    public Armure getArmure() {
+        return armure;
+    }
+
+    public void setArmure(Armure armure) {
+        this.armure = armure;
     }
 
     /*****************************Methodes *************************************/
