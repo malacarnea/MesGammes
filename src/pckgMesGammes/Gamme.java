@@ -225,7 +225,23 @@ class Gamme {
       note.note_by_nom(newNote);
       
   }
-
+  
+  /**
+   * fonction qui recherche si une Note se trouve sur la gamme courante
+   * @param Note note a chercher
+   * @return boolean 
+   */
+  public boolean is_note_in_gamme(Note noteSrc){
+      //parcourir gamme et comparer les notes
+      Iterator it=notes_gamme.entrySet().iterator();
+      boolean find=false;
+      while(it.hasNext()&&!find){
+          Entry entry=(Entry) it.next();
+          Note note=(Note) entry.getValue();
+          find=(note.equals(noteSrc));
+      }
+      return find;
+  }
  
     /**
      * ajoute une note dans le tableau de la gamme [I, II, III, IV...], on
@@ -325,9 +341,14 @@ class Gamme {
     
     
     public static void main(String args[]){
-        Gamme g=new Gamme("G", "MAJEUR");
+        Gamme g=new Gamme("C", "MAJEUR");
         String note=Gamme.find_note_by_armure("MINEUR", new Armure("#", 3));
-       System.out.println(note);
+        if(g.is_note_in_gamme(new Note("A#"))){
+            System.out.println("note dans gamme");
+        }else{
+            System.out.println("Pas trouve");
+        }
+       //System.out.println(g);
 
     }
 }

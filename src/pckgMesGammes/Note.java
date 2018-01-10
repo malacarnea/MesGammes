@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
+import java.util.Objects;
 import static pckgMesGammes.Gamme.CHROMATIQUE_DO;
 
 class Note {
@@ -289,7 +290,6 @@ class Note {
         }
         //comme les derniers key et value contiennent forcement les valeurs de la note recherchee, on met a jour les attributs avec les valeurs trouvees
         this.set_ton_gamme(key);
-        //TODO refaire en fonction des nouveaux tableaux
         this.set_nom_e(note);
         this.set_nom_fr(this.search_nom_fr(note));
         this.set_couleur(this.search_couleur(note));
@@ -389,6 +389,43 @@ class Note {
                 + "\nCouleur : " + this.couleur
                 + "\n-----------------------------";
         return res;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 31 * hash + Objects.hashCode(this.nom_fr);
+        hash = 31 * hash + Objects.hashCode(this.nom_e);
+        hash = 31 * hash + Objects.hashCode(this.couleur);
+        hash = 31 * hash + (int) (Double.doubleToLongBits(this.ton_gamme) ^ (Double.doubleToLongBits(this.ton_gamme) >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Note other = (Note) obj;
+        if (Double.doubleToLongBits(this.ton_gamme) != Double.doubleToLongBits(other.ton_gamme)) {
+            return false;
+        }
+        if (!Objects.equals(this.nom_fr, other.nom_fr)) {
+            return false;
+        }
+        if (!Objects.equals(this.nom_e, other.nom_e)) {
+            return false;
+        }
+        if (!Objects.equals(this.couleur, other.couleur)) {
+            return false;
+        }
+        return true;
     }
 
     public static void main(String args[]) {
