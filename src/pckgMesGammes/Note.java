@@ -1,5 +1,6 @@
 package pckgMesGammes;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -20,7 +21,7 @@ class Note {
     /**
      * couleur associee a la note
      */
-    private String couleur;
+    private Color couleur;
 
     /**
      * ton de la note dans la gamme de Do majeur de base
@@ -59,71 +60,71 @@ class Note {
     /**
      * tableau qui denifit la couleur des notes
      */
-    public static final LinkedHashMap<String, ArrayList<String>> COULEUR_NOTES = new LinkedHashMap<String, ArrayList<String>>() {
+    public static final LinkedHashMap<Color, ArrayList<String>> COULEUR_NOTES = new LinkedHashMap<Color, ArrayList<String>>() {
         {
-            put("ROUGE", new ArrayList() {
+            put(Color.RED, new ArrayList() {
                 {
                     add("C");
                     add("B#");
                 }
             });
-            put("VIOLET", new ArrayList() {
+            put(Color.MAGENTA, new ArrayList() {
                 {
                     add("C#");
                     add("Db");
                 }
             });
-            put("VERT", new ArrayList() {
+            put(Color.GREEN, new ArrayList() {
                 {
                     add("D");
                 }
             });
-            put("JAUNE", new ArrayList() {
+            put(Color.YELLOW, new ArrayList() {
                 {
                     add("D#");
                     add("Eb");
                 }
             });
-            put("BLEU", new ArrayList() {
+            put(Color.BLUE, new ArrayList() {
                 {
                     add("E");
                 }
             });
-            put("ROSE", new ArrayList() {
+            put(Color.PINK, new ArrayList() {
                 {
                     add("E#");
                     add("F");
                 }
             });
-            put("ORANGE", new ArrayList() {
+            put(Color.darkGray, new ArrayList() {
                 {
                     add("F#");
                     add("Gb");
                 }
             });
-            put("BLEU_CIEL", new ArrayList() {
+            put(Color.CYAN, new ArrayList() {
                 {
                     add("G");
                 }
             });
-            put("MARRON", new ArrayList() {
+            put(Color.LIGHT_GRAY, new ArrayList() {
                 {
                     add("G#");
                     add("Ab");
                 }
             });
-            put("VERT_CLAIR", new ArrayList() {
+            put(Color.ORANGE, new ArrayList() {
                 {
                     add("A");
                 }
             });
-            put("GRIS", new ArrayList() {
+            put(Color.GRAY, new ArrayList() {
                 {
                     add("A#");
                     add("Bb");
                 }
             });
-            put("BLANC", new ArrayList() {
+            put(Color.WHITE, new ArrayList() {
                 {
                     add("B");
                     add("Cb");
@@ -149,7 +150,7 @@ class Note {
      * @param couleur string
      * @param ton_gamme double
      */
-    public Note(String nom_fr, String nom_e, String couleur, double ton_gamme) {
+    public Note(String nom_fr, String nom_e, Color couleur, double ton_gamme) {
         this.set_couleur(couleur);
         this.set_nom_e(nom_e);
         this.set_nom_fr(nom_fr);
@@ -197,7 +198,7 @@ class Note {
      *
      * @return String couleur
      */
-    public String get_couleur() {
+    public Color get_couleur() {
         return couleur;
     }
 
@@ -252,7 +253,7 @@ class Note {
      *
      * @param couleur String
      */
-    public void set_couleur(String couleur) {
+    public void set_couleur(Color couleur) {
         this.couleur = couleur;
     }
 
@@ -324,14 +325,14 @@ class Note {
      * @param String nom_e
      * @return String couleur
      */
-    public String search_couleur(String nom_e) {
+    public Color search_couleur(String nom_e) {
         Iterator it = COULEUR_NOTES.entrySet().iterator();
-        String color = "";
+        Color color = null;
         ArrayList<String> list = null;
         boolean find = false;
         while (it.hasNext() && !find) {
             Entry entry = (Entry) it.next();
-            color = (String) entry.getKey();
+            color = (Color) entry.getKey();
             list = (ArrayList<String>) entry.getValue();
             if (list.contains(nom_e)) {
                 find = true;
