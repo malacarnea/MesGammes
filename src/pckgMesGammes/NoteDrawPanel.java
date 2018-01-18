@@ -110,9 +110,9 @@ class NoteDrawPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(238, 238, 238));
+        setBackground(java.awt.Color.white);
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        setForeground(new java.awt.Color(105, 105, 105));
+        setOpaque(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
