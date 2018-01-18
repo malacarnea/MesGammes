@@ -8,15 +8,27 @@ package pckgMesGammes;
 import java.awt.Color;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.TableColumn;
-import static pckgMesGammes.NoteDrawPanel.RAYON;
 
 /**
  *
  * @author alicia
  */
 public class GUI_Gamme extends javax.swing.JFrame {
-
+    /**
+     *@description Gamme utilisee dans l'interface
+     */
+    private Gamme gamme;
+    /**
+     * constante qui definit la hauteur des cases des tableaux
+     */
+    public static final int HEIGHT_CELL=30;
+    /**
+     * constante qui definit la largeur des cases des tableaux
+     */
+    public static final int WIDTH_CELL=110;
     /**
      * Creates new form SrchGamme
      */
@@ -45,6 +57,8 @@ public class GUI_Gamme extends javax.swing.JFrame {
         cbInstrument = new javax.swing.JComboBox<>();
         btInstrument = new javax.swing.JButton();
         panelInstrument = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableInstrument = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         cbMode = new javax.swing.JComboBox<>();
@@ -96,10 +110,10 @@ public class GUI_Gamme extends javax.swing.JFrame {
         });
         tableauGamme.setAutoscrolls(false);
         tableauGamme.setEnabled(false);
-        tableauGamme.setMaximumSize(new java.awt.Dimension(2147483647, 50));
-        tableauGamme.setMinimumSize(new java.awt.Dimension(120, 50));
-        tableauGamme.setPreferredSize(new java.awt.Dimension(600, 50));
-        tableauGamme.setRowHeight(25);
+        tableauGamme.setMaximumSize(new java.awt.Dimension(2147483647, 60));
+        tableauGamme.setMinimumSize(new java.awt.Dimension(120, 60));
+        tableauGamme.setPreferredSize(new java.awt.Dimension(600, 60));
+        tableauGamme.setRowHeight(30);
         jScrollPane1.setViewportView(tableauGamme);
         if (tableauGamme.getColumnModel().getColumnCount() > 0) {
             tableauGamme.getColumnModel().getColumn(0).setHeaderValue("");
@@ -127,16 +141,40 @@ public class GUI_Gamme extends javax.swing.JFrame {
         cbInstrument.setModel(new javax.swing.DefaultComboBoxModel<>(Instrument.INTRUMENTS));
 
         btInstrument.setText("Afficher");
+        btInstrument.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btInstrumentActionPerformed(evt);
+            }
+        });
+
+        jTableInstrument.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTableInstrument.setRowHeight(30);
+        jTableInstrument.setTableHeader(null);
+        jTableInstrument.setVisible(false);
+        jScrollPane2.setViewportView(jTableInstrument);
+        jTableInstrument.getAccessibleContext().setAccessibleParent(panelInstrument);
 
         javax.swing.GroupLayout panelInstrumentLayout = new javax.swing.GroupLayout(panelInstrument);
         panelInstrument.setLayout(panelInstrumentLayout);
         panelInstrumentLayout.setHorizontalGroup(
             panelInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 892, Short.MAX_VALUE)
         );
         panelInstrumentLayout.setVerticalGroup(
             panelInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 229, Short.MAX_VALUE)
+            .addGroup(panelInstrumentLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 37, Short.MAX_VALUE))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -234,9 +272,6 @@ public class GUI_Gamme extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(panelInstrument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(515, 515, 515)
                 .addComponent(btRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -270,7 +305,8 @@ public class GUI_Gamme extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panelInstrument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(139, 139, 139))))
         );
         layout.setVerticalGroup(
@@ -287,22 +323,22 @@ public class GUI_Gamme extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btRechercheNote, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(horizontal_separator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelTabGamme, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbInstrument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btInstrument))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelInstrument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(75, 75, 75)
                 .addComponent(btRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -330,7 +366,7 @@ public class GUI_Gamme extends javax.swing.JFrame {
     private void btRechercheNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRechercheNoteActionPerformed
         String note_select = (String) cbNote.getSelectedItem();
         String mode = (String) cbMode.getSelectedItem();
-        Gamme gamme = new Gamme(note_select, mode);
+        this.gamme = new Gamme(note_select, mode);
         //afficher nom de la gamme
         String texte = "Gamme de " + gamme.get_fondamentale().get_nom_fr() + " " + mode + " ou " + note_select + " " + mode;
         labelTabGamme.setText(texte);
@@ -343,14 +379,17 @@ public class GUI_Gamme extends javax.swing.JFrame {
             Note noteInGamme = (Note) entry.getValue();
             String[] notes = {noteInGamme.get_nom_fr(), noteInGamme.get_nom_e()};
             Color c = noteInGamme.get_couleur();
-            //modifier les valeurs du tableau
+            //model de colonne
             TableColumn colonne = tableauGamme.getColumn(degre);
             int col = colonne.getModelIndex();
-            int x = colonne.getWidth() / 2 - RAYON / 2;
+            int cellWidth = colonne.getWidth();
+            //recuperation info ligne
+            int cellHeight=tableauGamme.getRowHeight();
+            //modifier les valeurs du tableau
             for (int i = 0; i < notes.length; i++) {
                 tableauGamme.setValueAt(notes[i], i, col);
             }
-            NoteCellRenderer ncr = new NoteCellRenderer(noteInGamme, x);
+            NoteCellRenderer ncr = new NoteCellRenderer(noteInGamme, cellWidth, cellHeight);
             colonne.setCellRenderer(ncr);
         }
 
@@ -381,9 +420,37 @@ public class GUI_Gamme extends javax.swing.JFrame {
         //une fois la note trouvee, on la seletionne
         cbNote.setSelectedItem(note);
     }//GEN-LAST:event_cbDieseActionPerformed
+
+    private void btInstrumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInstrumentActionPerformed
+        String select=(String) cbInstrument.getSelectedItem();
+        int height=0, width=0;
+        switch (select){
+            case "Guitare":
+                String tunning = "STANDARD";
+                System.out.println(tunning);
+                Guitare g = new Guitare(this.gamme, tunning);
+                GuitareTableModel model=new GuitareTableModel(g);
+                jTableInstrument.setModel(model);
+                height=g.ligne_instrum*HEIGHT_CELL;
+                width=g.taille_instrum*WIDTH_CELL;
+                break;
+        }
+        
+       jTableInstrument.setTableHeader(null);
+        //modifier l'hauteur des lignes
+        jTableInstrument.setAutoscrolls(false);
+        jTableInstrument.setEnabled(false);
+        jTableInstrument.setMaximumSize(new java.awt.Dimension(2147483647, height));
+        jTableInstrument.setMinimumSize(new java.awt.Dimension(120, height));
+        jTableInstrument.setPreferredSize(new java.awt.Dimension(width, height));
+        jTableInstrument.setRowHeight(HEIGHT_CELL);
+        jTableInstrument.setVisible(true);
+        
+    }//GEN-LAST:event_btInstrumentActionPerformed
     /**
      * fonction qui permet de modifier le contenu de la liste CbNotes en
      * fonction du mode selectionne
+     * @return String[]
      */
     public String[] getCbNotes() {
         String mode = "MAJEUR";
@@ -447,6 +514,8 @@ public class GUI_Gamme extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableInstrument;
     private javax.swing.JLabel labelTabGamme;
     private javax.swing.JPanel panelInstrument;
     private javax.swing.JTable tableauGamme;

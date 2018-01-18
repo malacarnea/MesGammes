@@ -54,6 +54,46 @@ abstract class Instrument {
         taille_instrum = colonne;
     }
 
+    public Note[][] getNotes_instrum() {
+        return notes_instrum;
+    }
+
+    public void setNotes_instrum(Note[][] notes_instrum) {
+        this.notes_instrum = notes_instrum;
+    }
+
+    public Note[][] getGamme_instrum() {
+        return gamme_instrum;
+    }
+
+    public void setGamme_instrum(Note[][] gamme_instrum) {
+        this.gamme_instrum = gamme_instrum;
+    }
+
+    public Note[][] getAccord_instrum() {
+        return accord_instrum;
+    }
+
+    public void setAccord_instrum(Note[][] accord_instrum) {
+        this.accord_instrum = accord_instrum;
+    }
+
+    public int getLigne_instrum() {
+        return ligne_instrum;
+    }
+
+    public void setLigne_instrum(int ligne_instrum) {
+        this.ligne_instrum = ligne_instrum;
+    }
+
+    public int getTaille_instrum() {
+        return taille_instrum;
+    }
+
+    public void setTaille_instrum(int taille_instrum) {
+        this.taille_instrum = taille_instrum;
+    }
+    
     /**
      * fonction qui ajuste les notes sur notes_instrum en fonction des notes sur
      * la gamme
@@ -100,7 +140,34 @@ abstract class Instrument {
             }
         }
     }
-
+     /**
+     * @description function qui retourne la note sur le tableau de l'instrument a la position (i, j)
+     * @param int i
+     * @param int j
+     * @return Note
+     */
+    public Note getNoteAtPos(int i, int j){
+        return this.notes_instrum[i][j];
+    }
+    /**
+     * @description function qui retourne la note sur le tableau de gamme de l'instrument a la position (i, j)
+     * @param int i
+     * @param int j
+     * @return Note
+     */
+    public Note getNoteGammeAtPos(int i, int j){
+        return this.gamme_instrum[i][j];
+    }
+    
+     /**
+     * @description function qui retourne la note sur le tableau d'accord de l'instrument a la position (i, j)
+     * @param int i
+     * @param int j
+     * @return Note
+     */
+    public Note getNoteAccordAtPos(int i, int j){
+        return this.accord_instrum[i][j];
+    }
     /**
      * fonction qui permet d'initialiser une guitare en fonction du tunning
      *

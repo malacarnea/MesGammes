@@ -113,7 +113,9 @@ class Guitare extends Instrument {
 //        Gamme g = new Gamme("G", "MAJEUR");
 //        Piano p = new Piano(g);
         Guitare g = new Guitare(new Gamme("G", "MAJEUR"),"STANDARD");
+        
         System.out.println(g);
+        System.out.println(g.getNoteGammeAtPos(4, 1));
     }
 
 }

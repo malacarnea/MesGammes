@@ -50,17 +50,17 @@ class Gamme {
   public static final TreeMap<Double, ArrayList<String>> CHROMATIQUE_DO=new TreeMap<Double, ArrayList<String>>(){
     {
         put(new Double(0),new ArrayList(){{add("C");add("B#");}});
-        put(new Double(0.5),new ArrayList(){{add("C#"); add("Db");}});
+        put(0.5,new ArrayList(){{add("C#"); add("Db");}});
         put(new Double(1),new ArrayList(){{add("D");}});
-        put(new Double(1.5),new ArrayList(){{add("D#"); add("Eb");}});
+        put(1.5,new ArrayList(){{add("D#"); add("Eb");}});
         put(new Double(2),new ArrayList(){{add("E");add("Fb");}});
-        put(new Double(2.5),new ArrayList(){{add("F");add("E#");}});
+        put(2.5,new ArrayList(){{add("F");add("E#");}});
         put(new Double(3),new ArrayList(){{add("F#"); add("Gb");}});
-        put(new Double(3.5),new ArrayList(){{add("G"); }});
+        put(3.5,new ArrayList(){{add("G"); }});
         put(new Double(4),new ArrayList(){{add("G#"); add("Ab");}});
-        put(new Double(4.5),new ArrayList(){{add("A");}});
+        put(4.5,new ArrayList(){{add("A");}});
         put(new Double(5),new ArrayList(){{add("A#"); add("Bb");}});
-        put(new Double(5.5),new ArrayList(){{add("B");add("Cb");}});
+        put(5.5,new ArrayList(){{add("B");add("Cb");}});
     }
   };
 

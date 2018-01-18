@@ -16,9 +16,10 @@ import java.awt.Graphics;
 class NoteDrawPanel extends javax.swing.JPanel {
     private String txt="";
     private Color couleur=null;
-    private int posX = 0;
-    private int posY = 0;
-    public static final int RAYON = 23;
+    private int width = 0;
+    private int height = 0;
+    public static final int DIAMETRE = 28;
+    public static final int FONT_SIZE = 11;
     /**
      * Creates new form NoteDrawPanel
      * @param note
@@ -28,8 +29,8 @@ class NoteDrawPanel extends javax.swing.JPanel {
     public NoteDrawPanel(Color couleur, String str, int x, int y){
         this.txt=str;
         this.couleur=couleur;
-        this.posX=x;
-        this.posY=y;
+        this.width=x;
+        this.height=y;
        
         initComponents();
     }
@@ -50,40 +51,43 @@ class NoteDrawPanel extends javax.swing.JPanel {
         this.couleur = couleur;
     }
 
-    public int getPosX() {
-        return posX;
+    public int getWidth() {
+        return width;
     }
 
-    public void setPosX(int posX) {
-        this.posX = posX;
+    public void setPosX(int width) {
+        this.width = width;
     }
 
     public int getPosY() {
-        return posY;
+        return height;
     }
 
-    public void setPosY(int posY) {
-        this.posY = posY;
+    public void setPosY(int height) {
+        this.height = height;
     }
 
     @Override
     public void paintComponent(Graphics g) {
         //pas oublier le composant parent sinon ça le cache et on a un fond blanc tres moche
         super.paintComponent(g);
-         g.setColor(Color.BLACK);
-        g.drawOval(posX, posY, RAYON, RAYON);
+        int posX=this.width / 2 - DIAMETRE/2;
+        int posY=this.height / 2 - DIAMETRE/2;
+        g.setColor(Color.BLACK);
+        g.drawOval(posX, posY, DIAMETRE, DIAMETRE);
         // On redéfinit une couleur pour notre rond
         g.setColor(this.couleur);
         // On le dessine aux coordonnées souhaitées
-        g.fillOval(posX, posY, RAYON, RAYON);
+        g.fillOval(posX, posY, DIAMETRE, DIAMETRE);
+        
         // On redéfinit une couleur pour le texte
         //si rond foncé, texte blanc et inversement
         g.setColor(this.couleurOpposee());
         //calculer la position du texte en fonction du nombre de caracteres de la note
-        int length=txt.length();
-        Font f = new Font ("Sanserif", Font.BOLD, 11);
+        Font f = new Font ("Sanserif", Font.BOLD, FONT_SIZE);
         g.setFont (f);
-        g.drawString(txt, posX+(RAYON/2-length), 15);
+        int length=g.getFontMetrics(f).stringWidth(txt);
+        g.drawString(txt, posX+(DIAMETRE/2-length/2), posY+DIAMETRE/2+f.getSize()/2);
     }
     
     /**
@@ -111,18 +115,17 @@ class NoteDrawPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         setBackground(java.awt.Color.white);
-        setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setOpaque(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGap(0, 74, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 13, Short.MAX_VALUE)
+            .addGap(0, 17, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
