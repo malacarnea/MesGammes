@@ -5,6 +5,7 @@
  */
 package pckgMesGammes;
 
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -42,7 +43,9 @@ import javax.swing.table.DefaultTableCellRenderer;
      public NoteCellRenderer(Note[] notes, int width, int height, int taille, String[] images){
          ndp=new NoteDrawPanel[taille];
          for(int i=0; i<taille; i++){
-             this.ndp[i]=new NoteDrawPanel(notes[i].get_couleur(), notes[i].get_nom_fr(), width, height, images[i]);  
+             Color c=(notes[i]!=null)?notes[i].get_couleur():null;
+             String en=(notes[i]!=null)?notes[i].get_nom_e():null;
+             this.ndp[i]=new NoteDrawPanel(c,en , width, height, images[i]);  
          }
      }
      

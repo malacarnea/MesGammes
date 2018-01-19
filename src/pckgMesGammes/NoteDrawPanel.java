@@ -22,7 +22,7 @@ class NoteDrawPanel extends javax.swing.JPanel {
     private int width = 0;
     private int height = 0;
     private String image="";
-    public static final int DIAMETRE = 28;
+    public static final int DIAMETRE = 25;
     public static final int FONT_SIZE = 11;
     /**
      * Creates new form NoteDrawPanel
@@ -79,7 +79,8 @@ class NoteDrawPanel extends javax.swing.JPanel {
             BufferedImage img = readImage(this.image);
             g.drawImage(img, 0, 0, null);
         }
-        if (!"0".equals(this.txt)) {
+        if (this.txt!=null) {
+            
             int posX = this.width / 2 - DIAMETRE / 2;
             int posY = this.height / 2 - DIAMETRE / 2;
             g.setColor(Color.BLACK);
@@ -98,7 +99,6 @@ class NoteDrawPanel extends javax.swing.JPanel {
             int length = g.getFontMetrics(f).stringWidth(txt);
             g.drawString(txt, posX + (DIAMETRE / 2 - length / 2), posY + DIAMETRE / 2 + f.getSize() / 2);
         }
-
     }
     
     /**

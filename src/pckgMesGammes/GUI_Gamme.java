@@ -177,8 +177,8 @@ public class GUI_Gamme extends javax.swing.JFrame {
         panelInstrumentLayout.setVerticalGroup(
             panelInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInstrumentLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -340,7 +340,7 @@ public class GUI_Gamme extends javax.swing.JFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbInstrument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btInstrument))
-                .addGap(18, 24, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(panelInstrument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(75, 75, 75)
                 .addComponent(btRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -428,30 +428,14 @@ public class GUI_Gamme extends javax.swing.JFrame {
     }//GEN-LAST:event_cbDieseActionPerformed
 
     private void btInstrumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInstrumentActionPerformed
-        String select=(String) cbInstrument.getSelectedItem();
-        int height=0, width=0;
-        switch (select){
+        String select = (String) cbInstrument.getSelectedItem();
+        switch (select) {
             case "Guitare":
                 String tunning = "STANDARD";
-                System.out.println(tunning);
                 Guitare g = new Guitare(this.gamme, tunning);
-                GuitareTableModel model=new GuitareTableModel(g);
-                jTableInstrument.setModel(model);
-                height=g.ligne_instrum*HEIGHT_CELL;
-                width=g.taille_instrum*WIDTH_CELL;
+                g.drawGuitareGamme(jTableInstrument);
                 break;
         }
-        
-       jTableInstrument.setTableHeader(null);
-        //modifier l'hauteur des lignes
-        jTableInstrument.setAutoscrolls(false);
-        jTableInstrument.setEnabled(false);
-        jTableInstrument.setMaximumSize(new java.awt.Dimension(2147483647, height));
-        jTableInstrument.setMinimumSize(new java.awt.Dimension(120, height));
-        jTableInstrument.setPreferredSize(new java.awt.Dimension(width, height));
-        jTableInstrument.setRowHeight(HEIGHT_CELL);
-        jTableInstrument.setVisible(true);
-        
     }//GEN-LAST:event_btInstrumentActionPerformed
     /**
      * fonction qui permet de modifier le contenu de la liste CbNotes en

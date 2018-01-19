@@ -18,20 +18,20 @@ import javax.swing.table.AbstractTableModel;
     private int ligne;
     private int col;
     
-    public static final String IMG="img/GuitareString.png";
     public GuitareTableModel(Guitare g){
         this.data=new Object[g.getLigne_instrum()][g.getTaille_instrum()];
+        this.title=new String[g.getTaille_instrum()];
         this.col=g.getTaille_instrum();
         this.ligne=g.getLigne_instrum();
         for(int i=0; i<g.getLigne_instrum(); i++){
             for(int j=0; j<g.getTaille_instrum(); j++){
                 Note note=g.getNoteGammeAtPos(i, j);
                 this.data[i][j]=(note!=null)? note.get_nom_e() : 0;
-                System.out.print(this.data[i][j]);
             }
+            this.title[i]=String.valueOf(i);
         }
         
-        this.title=null;
+        
     }
 
    

@@ -1,6 +1,8 @@
 package pckgMesGammes;
 
 import java.util.LinkedHashMap;
+import javax.swing.JTable;
+import javax.swing.table.TableColumn;
 
 class Guitare extends Instrument {
     /**
@@ -11,17 +13,45 @@ class Guitare extends Instrument {
      * nombre de cordes sur guitare
      */
     public static final int NB_CORDES_GUITARE = 6;
+    /**
+     * constante qui donne la hauteur d'une case dans le tableau
+     */
+    public static final int HEIGHT_CELL_GUITARE=30;
+    /**
+     * constante qui donne la largeur d'une case dans le tableau
+     */
+    public static final int WIDTH_CELL_GUITARE=75;
+    /**
+     * constante qui donne l'image de la tete de la guitare
+     */
+    public static final String TETE="/pckgMesGammes/img/tete.png";
+    /**
+     * constante qui donne l'image d'une corde normale
+     */
+    public static final String CORDE="/pckgMesGammes/img/GuitareString.png";
+    /**
+     * constante qui donne le chemin de l'image du clou entier sur la guitare
+     */
+    public static final String CLOU="/pckgMesGammes/img/clou.png";
+    /**
+     * constante qui donne le chemin de l'image du demi clou haut sur la guitare
+     */
+    public static final String DEMI_CLOU_UP="/pckgMesGammes/img/clouUp.png";
+    /**
+     * constante qui donne le chemin de l'image du demi clou bas sur la guitare
+     */
+    public static final String DEMI_CLOU_DOWN="/pckgMesGammes/img/clouDown.png";
     
     /**
      *constante qui definit les images correspondant a chaque case de la guitare
      */
-    public static final String[][] GUITARE_IMAGES=new String((TETE));
-    
-    public static final String TETE="tete.png";
-    public static final String CORDE="corde.png";
-    public static final String CLOU="Clou.png";
-    public static final String DEMI_CLOU_UP="demiClouUp.png";
-    public static final String DEMI_CLOU_DOWN="demiClouDown.png";
+    public static final String[][] GUITARE_IMAGES={
+    {TETE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE},
+    {TETE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CLOU},
+    {TETE, CORDE, CORDE, DEMI_CLOU_DOWN, CORDE, DEMI_CLOU_DOWN, CORDE, DEMI_CLOU_DOWN, CORDE, DEMI_CLOU_DOWN, CORDE, CORDE, CORDE},
+    {TETE, CORDE, CORDE, DEMI_CLOU_UP, CORDE, DEMI_CLOU_UP, CORDE, DEMI_CLOU_UP, CORDE, DEMI_CLOU_UP, CORDE, CORDE, CORDE},
+    {TETE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CLOU},
+    {TETE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE}};
     /**
      * tableau avec nonm et notes des differents Tunning (accordage guitare)
      */
@@ -108,8 +138,45 @@ class Guitare extends Instrument {
         }
 
     }
-    
-    
+    /**
+     * @description methode qui permet de dessiner graphiquement une guitare sur le JTable en parametre
+     * @param table JTable
+     */
+    public void drawGuitareGamme(JTable table) {
+        int height = 0, width = 0;
+        
+        height = HEIGHT_CELL_GUITARE;
+        width= WIDTH_CELL_GUITARE;
+        GuitareTableModel model = new GuitareTableModel(this);
+        table.setModel(model);
+        //le but ici, c'est de parcourir le tableau modelisant la guitare en Note
+        //on se refere au tableau contenant les images de base de la guitare et on 
+        //modifie le CellReferer en fonction de la Note
+        //etant donné que le cellReferer fonctionne pour toute une colonne, on regarde simplement les colonnes
+        //et on modifira à chaque fois le TableColumn
+       
+        for( int i=0;i<this.taille_instrum; i++){
+            Note[] notesCol=new Note[this.ligne_instrum];
+            String[] imgCol=new String[this.ligne_instrum];
+            for(int j=0; j<this.ligne_instrum; j++){
+                notesCol[j]=this.getNoteGammeAtPos(j, i);
+                imgCol[j]=GUITARE_IMAGES[j][i];
+            }
+               //cellRenderer
+               NoteCellRenderer ncr=new NoteCellRenderer(notesCol, width, height, this.ligne_instrum, imgCol);
+               table.getColumnModel().getColumn(i).setCellRenderer(ncr);
+        }
+        
+        table.setTableHeader(null);
+        //modifier l'hauteur des lignes
+        table.setAutoscrolls(false);
+        table.setEnabled(false);
+        table.setMaximumSize(new java.awt.Dimension(2147483647, height*this.ligne_instrum));
+        table.setMinimumSize(new java.awt.Dimension(120, height));
+        table.setPreferredSize(new java.awt.Dimension(width, height*this.ligne_instrum));
+        table.setRowHeight(height);
+        table.setVisible(true);
+    }
 
    
 
