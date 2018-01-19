@@ -28,8 +28,8 @@ import javax.swing.table.DefaultTableCellRenderer;
       */
      public NoteCellRenderer(Note note, int width, int height){
          ndp=new NoteDrawPanel[2];
-         this.ndp[0]=new NoteDrawPanel(note.get_couleur(), note.get_nom_fr(), width, height);         
-         this.ndp[1]=new NoteDrawPanel(note.get_couleur(), note.get_nom_e(), width, height); 
+         this.ndp[0]=new NoteDrawPanel(note.get_couleur(), note.get_nom_fr(), width, height, null);         
+         this.ndp[1]=new NoteDrawPanel(note.get_couleur(), note.get_nom_e(), width, height, null); 
      }
      
       /**
@@ -39,10 +39,10 @@ import javax.swing.table.DefaultTableCellRenderer;
       * @param x int
       * @param taille
       */
-     public NoteCellRenderer(Note[] notes, int width, int height, int taille){
+     public NoteCellRenderer(Note[] notes, int width, int height, int taille, String[] images){
          ndp=new NoteDrawPanel[taille];
          for(int i=0; i<taille; i++){
-             this.ndp[i]=new NoteDrawPanel(notes[i].get_couleur(), notes[i].get_nom_fr(), width, height);  
+             this.ndp[i]=new NoteDrawPanel(notes[i].get_couleur(), notes[i].get_nom_fr(), width, height, images[i]);  
          }
      }
      

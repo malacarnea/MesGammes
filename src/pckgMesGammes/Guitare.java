@@ -11,6 +11,17 @@ class Guitare extends Instrument {
      * nombre de cordes sur guitare
      */
     public static final int NB_CORDES_GUITARE = 6;
+    
+    /**
+     *constante qui definit les images correspondant a chaque case de la guitare
+     */
+    public static final String[][] GUITARE_IMAGES=new String((TETE));
+    
+    public static final String TETE="tete.png";
+    public static final String CORDE="corde.png";
+    public static final String CLOU="Clou.png";
+    public static final String DEMI_CLOU_UP="demiClouUp.png";
+    public static final String DEMI_CLOU_DOWN="demiClouDown.png";
     /**
      * tableau avec nonm et notes des differents Tunning (accordage guitare)
      */

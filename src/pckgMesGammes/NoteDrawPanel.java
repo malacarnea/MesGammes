@@ -8,6 +8,9 @@ package pckgMesGammes;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -18,6 +21,7 @@ class NoteDrawPanel extends javax.swing.JPanel {
     private Color couleur=null;
     private int width = 0;
     private int height = 0;
+    private String image="";
     public static final int DIAMETRE = 28;
     public static final int FONT_SIZE = 11;
     /**
@@ -26,12 +30,12 @@ class NoteDrawPanel extends javax.swing.JPanel {
      * @param x
      * @param y
      */
-    public NoteDrawPanel(Color couleur, String str, int x, int y){
+    public NoteDrawPanel(Color couleur, String str, int x, int y, String image){
         this.txt=str;
         this.couleur=couleur;
         this.width=x;
         this.height=y;
-       
+        this.image=image;
         initComponents();
     }
 
@@ -71,23 +75,30 @@ class NoteDrawPanel extends javax.swing.JPanel {
     public void paintComponent(Graphics g) {
         //pas oublier le composant parent sinon ça le cache et on a un fond blanc tres moche
         super.paintComponent(g);
-        int posX=this.width / 2 - DIAMETRE/2;
-        int posY=this.height / 2 - DIAMETRE/2;
-        g.setColor(Color.BLACK);
-        g.drawOval(posX, posY, DIAMETRE, DIAMETRE);
-        // On redéfinit une couleur pour notre rond
-        g.setColor(this.couleur);
-        // On le dessine aux coordonnées souhaitées
-        g.fillOval(posX, posY, DIAMETRE, DIAMETRE);
-        
-        // On redéfinit une couleur pour le texte
-        //si rond foncé, texte blanc et inversement
-        g.setColor(this.couleurOpposee());
-        //calculer la position du texte en fonction du nombre de caracteres de la note
-        Font f = new Font ("Sanserif", Font.BOLD, FONT_SIZE);
-        g.setFont (f);
-        int length=g.getFontMetrics(f).stringWidth(txt);
-        g.drawString(txt, posX+(DIAMETRE/2-length/2), posY+DIAMETRE/2+f.getSize()/2);
+        if (image != null) {
+            BufferedImage img = readImage(this.image);
+            g.drawImage(img, 0, 0, null);
+        }
+        if (!"0".equals(this.txt)) {
+            int posX = this.width / 2 - DIAMETRE / 2;
+            int posY = this.height / 2 - DIAMETRE / 2;
+            g.setColor(Color.BLACK);
+            g.drawOval(posX, posY, DIAMETRE, DIAMETRE);
+            // On redéfinit une couleur pour notre rond
+            g.setColor(this.couleur);
+            // On le dessine aux coordonnées souhaitées
+            g.fillOval(posX, posY, DIAMETRE, DIAMETRE);
+
+            // On redéfinit une couleur pour le texte
+            //si rond foncé, texte blanc et inversement
+            g.setColor(this.couleurOpposee());
+            //calculer la position du texte en fonction du nombre de caracteres de la note
+            Font f = new Font("Sanserif", Font.BOLD, FONT_SIZE);
+            g.setFont(f);
+            int length = g.getFontMetrics(f).stringWidth(txt);
+            g.drawString(txt, posX + (DIAMETRE / 2 - length / 2), posY + DIAMETRE / 2 + f.getSize() / 2);
+        }
+
     }
     
     /**
@@ -105,6 +116,15 @@ class NoteDrawPanel extends javax.swing.JPanel {
         return new Color(255-red, 255-green, 255-blue);
     }
     
+    
+    private static BufferedImage readImage(String filename) {
+        try {
+            return ImageIO.read(NoteDrawPanel.class.getResource(filename));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -114,22 +134,28 @@ class NoteDrawPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(java.awt.Color.white);
+        noteLabel = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(204, 204, 204));
         setOpaque(false);
+
+        noteLabel.setEnabled(false);
+        noteLabel.setFocusable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 74, Short.MAX_VALUE)
+            .addComponent(noteLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 17, Short.MAX_VALUE)
+            .addComponent(noteLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel noteLabel;
     // End of variables declaration//GEN-END:variables
 }

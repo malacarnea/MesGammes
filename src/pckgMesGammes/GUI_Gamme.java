@@ -70,6 +70,7 @@ public class GUI_Gamme extends javax.swing.JFrame {
         cbDiese = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Rechercher une gamme avec une note ou avec les dièses/bémols:");
@@ -83,6 +84,7 @@ public class GUI_Gamme extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        tableauGamme.setBackground(null);
         tableauGamme.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tableauGamme.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,8 +141,10 @@ public class GUI_Gamme extends javax.swing.JFrame {
         jLabel6.setText("Gamme sur instrument :");
 
         cbInstrument.setModel(new javax.swing.DefaultComboBoxModel<>(Instrument.INTRUMENTS));
+        cbInstrument.setEnabled(false);
 
         btInstrument.setText("Afficher");
+        btInstrument.setEnabled(false);
         btInstrument.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btInstrumentActionPerformed(evt);
@@ -174,7 +178,7 @@ public class GUI_Gamme extends javax.swing.JFrame {
             panelInstrumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInstrumentLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 37, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -336,7 +340,7 @@ public class GUI_Gamme extends javax.swing.JFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbInstrument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btInstrument))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 24, Short.MAX_VALUE)
                 .addComponent(panelInstrument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(75, 75, 75)
                 .addComponent(btRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -392,7 +396,9 @@ public class GUI_Gamme extends javax.swing.JFrame {
             NoteCellRenderer ncr = new NoteCellRenderer(noteInGamme, cellWidth, cellHeight);
             colonne.setCellRenderer(ncr);
         }
-
+           //activer cb instrument et bouton instrument
+           cbInstrument.setEnabled(true);
+           btInstrument.setEnabled(true);
 
     }//GEN-LAST:event_btRechercheNoteActionPerformed
 
