@@ -11,14 +11,14 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author alici
  */
- class GuitareTableModel extends AbstractTableModel{
+ class InstrumentTableModel extends AbstractTableModel{
     
     private Object[][] data;
     private String[] title;
     private int ligne;
     private int col;
     
-    public GuitareTableModel(Guitare g){
+    public InstrumentTableModel(Instrument g){
         this.data=new Object[g.getLigne_instrum()][g.getTaille_instrum()];
         this.title=new String[g.getTaille_instrum()];
         this.col=g.getTaille_instrum();

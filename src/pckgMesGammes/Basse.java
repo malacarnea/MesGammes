@@ -25,6 +25,23 @@ class Basse extends Instrument {
            
         }
     };
+    
+    /**
+     * constante d'entier qui definit la largeur d'une case dans le tableau affichant graphiquement la basse
+     */
+    public static final int BASSE_CELL_WIDTH=75;
+    /**
+     * constante d'entier qui definit la hauteur d'une case dans le tableau affichant graphiquement la basse
+     */
+    public static final int BASSE_CELL_HEIGHT=30;
+    /**
+     *constante qui definit les images correspondant a chaque case de la basse
+     */
+    public static final String[][] BASSE_IMAGES={
+    {TETE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, DEMI_CLOU_DOWN},
+    {TETE, CORDE, CORDE, DEMI_CLOU_DOWN, CORDE, DEMI_CLOU_DOWN, CORDE, DEMI_CLOU_DOWN, CORDE, DEMI_CLOU_DOWN, CORDE, CORDE, DEMI_CLOU_UP},
+    {TETE, CORDE, CORDE, DEMI_CLOU_UP, CORDE, DEMI_CLOU_UP, CORDE, DEMI_CLOU_UP, CORDE, DEMI_CLOU_UP, CORDE, CORDE, DEMI_CLOU_DOWN},
+     {TETE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, CORDE, DEMI_CLOU_UP},};
 
     /**
      * constructeur de base d'une guitare, construit le tableau contenant toutes
@@ -86,10 +103,10 @@ class Basse extends Instrument {
                 i++;
             } while (i < this.taille_instrum);
         }
-
+        this.instrument_cell_width=BASSE_CELL_WIDTH;
+        this.instrument_cell_height=BASSE_CELL_HEIGHT;
+        this.instrument_images=BASSE_IMAGES;
     }
-    
-    
 
    
 

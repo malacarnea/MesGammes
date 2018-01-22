@@ -3,6 +3,7 @@ package pckgMesGammes;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import javax.swing.JTable;
 
 abstract class Instrument {
 
@@ -28,13 +29,52 @@ abstract class Instrument {
      * taille instrument
      */
     protected int taille_instrum;
-    
+    /**
+     * attribut a initialiser dans la méthode init des classes filles
+     * donne la largeur d'une cellule du tableau affichant l'instrument
+     */
+     protected int instrument_cell_width;
+     
+     /**
+     * attribut a initialiser dans la méthode init des classes filles
+     * donne la hauteur d'une cellule du tableau affichant l'instrument
+     */
+     protected int instrument_cell_height;
+     
+     /**
+     * attribut a initialiser dans la méthode init des classes filles
+     * tableau d'adresse des fichiers representant graphiquement l'instrument
+     */
+     protected String[][] instrument_images;
     
     /**
      * coonstante qui definit la liste des instruments disponibles
      */
     public static final String[] INTRUMENTS={"Piano", "Guitare", "Basse"};
     
+    
+     /**
+     * constante qui donne l'image de la tete de la guitare/basse
+     */
+    public static final String TETE="/pckgMesGammes/img/tete.png";
+    /**
+     * constante qui donne l'image d'une corde normale
+     */
+    public static final String CORDE="/pckgMesGammes/img/GuitareString.png";
+    /**
+     * constante qui donne le chemin de l'image du clou entier sur la guitare/basse
+     */
+    public static final String CLOU="/pckgMesGammes/img/clou.png";
+    /**
+     * constante qui donne le chemin de l'image du demi clou haut sur la guitare/basse
+     */
+    public static final String DEMI_CLOU_UP="/pckgMesGammes/img/clouUp.png";
+    /**
+     * constante qui donne le chemin de l'image du demi clou bas sur la guitare/basse
+     */
+    public static final String DEMI_CLOU_DOWN="/pckgMesGammes/img/clouDown.png";
+    
+   
     /**
      * constructeur
      */
@@ -174,6 +214,45 @@ abstract class Instrument {
      * @param String tunning
      */
     public abstract void init_instrum(String tunning);
+    
+     /**
+     * @description methode qui permet de dessiner graphiquement une guitare sur le JTable en parametre
+     * @param table JTable
+     */
+    public void drawInstrumentGamme(JTable table) {
+        int height = this.instrument_cell_height;
+        int width= this.instrument_cell_width;
+        InstrumentTableModel model = new InstrumentTableModel(this);
+        table.setModel(model);
+        //le but ici, c'est de parcourir le tableau modelisant la guitare en Note
+        //on se refere au tableau contenant les images de base de la guitare et on 
+        //modifie le CellReferer en fonction de la Note
+        //etant donné que le cellReferer fonctionne pour toute une colonne, on regarde simplement les colonnes
+        //et on modifira à chaque fois le TableColumn
+       
+        for( int i=0;i<this.taille_instrum; i++){
+            Note[] notesCol=new Note[this.ligne_instrum];
+            String[] imgCol=new String[this.ligne_instrum];
+            for(int j=0; j<this.ligne_instrum; j++){
+                notesCol[j]=this.getNoteGammeAtPos(j, i);
+                imgCol[j]=this.instrument_images[j][i];
+            }
+               //cellRenderer
+               NoteCellRenderer ncr=new NoteCellRenderer(notesCol, width, height, this.ligne_instrum, imgCol);
+               table.getColumnModel().getColumn(i).setCellRenderer(ncr);
+        }
+        
+        table.setTableHeader(null);
+        //modifier l'hauteur des lignes
+        table.setAutoscrolls(false);
+        table.setEnabled(false);
+        table.setMaximumSize(new java.awt.Dimension(2147483647, height*this.ligne_instrum));
+        table.setMinimumSize(new java.awt.Dimension(120, height));
+        table.setPreferredSize(new java.awt.Dimension(width, height*this.ligne_instrum));
+        table.setRowHeight(height);
+        table.setVisible(true);
+    }
+    
 
     @Override
     public String toString() {

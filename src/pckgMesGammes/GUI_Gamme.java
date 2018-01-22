@@ -8,8 +8,6 @@ package pckgMesGammes;
 import java.awt.Color;
 import java.util.Iterator;
 import java.util.Map.Entry;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 
 /**
@@ -429,13 +427,21 @@ public class GUI_Gamme extends javax.swing.JFrame {
 
     private void btInstrumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInstrumentActionPerformed
         String select = (String) cbInstrument.getSelectedItem();
+        String tunning = "STANDARD";
+        Instrument i=null;
         switch (select) {
             case "Guitare":
-                String tunning = "STANDARD";
-                Guitare g = new Guitare(this.gamme, tunning);
-                g.drawGuitareGamme(jTableInstrument);
+                i = new Guitare(this.gamme, tunning);
+                
                 break;
+            case "Basse":
+                i = new Basse(this.gamme, tunning);
+                break;
+            default:
+                i=new Piano(this.gamme);
         }
+        i.drawInstrumentGamme(jTableInstrument);
+        System.out.println(panelInstrument.getWidth());
     }//GEN-LAST:event_btInstrumentActionPerformed
     /**
      * fonction qui permet de modifier le contenu de la liste CbNotes en
