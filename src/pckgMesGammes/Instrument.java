@@ -54,8 +54,22 @@ abstract class Instrument {
      * coonstante qui definit la liste des instruments disponibles
      */
     public static final String[] INTRUMENTS={"Piano", "Guitare", "Basse"};
-    
-    
+     /**
+     * constante qui donne l'image d'une blanche sur le piano
+     */
+    public static final String BLANCHE="/pckgMesGammes/img/blanche.png";
+    /**
+     * constante qui donne l'image d'une blanche do/fa sur le piano
+     */
+    public static final String BLANCHE_DIESE="/pckgMesGammes/img/blanche_diese.png";
+     /**
+     * constante qui donne l'image d'une blanche mi/si sur le piano
+     */
+    public static final String BLANCHE_BEMOL="/pckgMesGammes/img/blanche_bemol.png";
+    /**
+     * constante qui donne l'image d'une noire sur le piano
+     */
+     public static final String NOIRE="/pckgMesGammes/img/noir.png";
      /**
      * constante qui donne l'image de la tete de la guitare/basse
      */
@@ -229,7 +243,11 @@ abstract class Instrument {
      * @retrun String tunning correspondant au nom passe en param
      */
     public String get_tunning_from_name(String name){
-        return this.tunning.get(name);
+        if(this.tunning!=null){
+            return this.tunning.get(name);
+        }else{
+            return null;
+        }
     }
     
     /**
@@ -237,17 +255,23 @@ abstract class Instrument {
      *@param name String nom du tunning
      * @retrun String tunning correspondant au nom passe en param
      */
-    public String[] get_list_tunning(){
-        String[] toReturn=new String[this.tunning.size()];
-        int cpt=0;
-        Iterator it=this.tunning.entrySet().iterator();
-        while(it.hasNext()){
-            Map.Entry entry=(Map.Entry) it.next();
-            toReturn[cpt++]=(String)entry.getKey();
+    public String[] get_list_tunning() {
+        String[] toReturn;
+        if (this.tunning != null) {
+            toReturn = new String[this.tunning.size()];
+            int cpt = 0;
+            Iterator it = this.tunning.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry entry = (Map.Entry) it.next();
+                toReturn[cpt++] = (String) entry.getKey();
+            }
+        }else{
+            toReturn=null;
         }
+
         return toReturn;
     }
-    
+
      /**
      * @description methode qui permet de dessiner graphiquement une guitare sur le JTable en parametre
      * @param table JTable

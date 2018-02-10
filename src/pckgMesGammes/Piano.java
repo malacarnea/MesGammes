@@ -6,12 +6,26 @@ class Piano extends Instrument {
     /**
      * taille du piano
      */
-    public static final int NB_TOUCHES = 61;
+    public static final int NB_TOUCHES = 13;
     /**
      * nombre de lignes tab piano
      */
     public static final int LIGNE_PIANO = 1;
     
+    /**
+     * constante d'entier qui definit la largeur d'une case dans le tableau affichant graphiquement la basse
+     */
+    public static final int PIANO_CELL_WIDTH=75;
+    /**
+     * constante d'entier qui definit la hauteur d'une case dans le tableau affichant graphiquement la basse
+     */
+    public static final int PIANO_CELL_HEIGHT=180;
+    
+     /**
+     *constante qui definit les images correspondant a chaque case de la basse
+     */
+    public static final String[][] PIANO_IMAGES={
+    {BLANCHE_DIESE, NOIRE, BLANCHE, NOIRE, BLANCHE_BEMOL, BLANCHE_DIESE, NOIRE, BLANCHE, NOIRE, BLANCHE, NOIRE, BLANCHE_BEMOL, BLANCHE_DIESE}};
     
     /**
      * constructeur de base sans parametres, affichage des dieses
@@ -44,6 +58,9 @@ class Piano extends Instrument {
                 //on insere cette nouvelle note a notes_instrum en veillant a faire des modulo
             }
         }
+         this.instrument_cell_width=PIANO_CELL_WIDTH;
+        this.instrument_cell_height=PIANO_CELL_HEIGHT;
+        this.instrument_images=PIANO_IMAGES;
     }
 
     @Override
