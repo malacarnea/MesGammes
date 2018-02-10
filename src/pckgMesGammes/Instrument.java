@@ -2,6 +2,7 @@ package pckgMesGammes;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.swing.JTable;
 
@@ -21,6 +22,8 @@ abstract class Instrument {
      * instrument
      */
     protected Note[][] accord_instrum;
+    
+    protected LinkedHashMap<String, String> tunning;
     /**
      * nombre de lignes du tableau
      */
@@ -209,11 +212,41 @@ abstract class Instrument {
         return this.accord_instrum[i][j];
     }
     /**
-     * fonction qui permet d'initialiser une guitare en fonction du tunning
+     * fonction qui permet d'initialiser un instrument en fonction du tunning
      *
      * @param String tunning
      */
     public abstract void init_instrum(String tunning);
+    
+    /**
+     * fonction qui modifie la liste des tunnings pour un instrument ou null si pas de tunning
+     */
+    public abstract void set_tunning();
+    
+    /**
+     * fonction qui renvoie la liste des tunnings pour un instrument ou nuul si pas de tunning
+     *@param name String nom du tunning
+     * @retrun String tunning correspondant au nom passe en param
+     */
+    public String get_tunning_from_name(String name){
+        return this.tunning.get(name);
+    }
+    
+    /**
+     * fonction qui renvoie la liste des tunnings pour un instrument ou nuul si pas de tunning
+     *@param name String nom du tunning
+     * @retrun String tunning correspondant au nom passe en param
+     */
+    public String[] get_list_tunning(){
+        String[] toReturn=new String[this.tunning.size()];
+        int cpt=0;
+        Iterator it=this.tunning.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry entry=(Map.Entry) it.next();
+            toReturn[cpt++]=(String)entry.getKey();
+        }
+        return toReturn;
+    }
     
      /**
      * @description methode qui permet de dessiner graphiquement une guitare sur le JTable en parametre

@@ -7,7 +7,9 @@ package pckgMesGammes;
 
 import java.awt.Color;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
+import javax.swing.ComboBoxModel;
 import javax.swing.table.TableColumn;
 
 /**
@@ -51,9 +53,6 @@ public class GUI_Gamme extends javax.swing.JFrame {
         tableauGamme = new javax.swing.JTable();
         btRetour = new javax.swing.JButton();
         labelTabGamme = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        cbInstrument = new javax.swing.JComboBox<>();
-        btInstrument = new javax.swing.JButton();
         panelInstrument = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableInstrument = new javax.swing.JTable();
@@ -66,6 +65,13 @@ public class GUI_Gamme extends javax.swing.JFrame {
         vertical_separator = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         cbDiese = new javax.swing.JComboBox<>();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        cbInstrument = new javax.swing.JComboBox<>();
+        btInstrument = new javax.swing.JButton();
+        lab_gamme_instrum = new javax.swing.JLabel();
+        cb_tunning = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(null);
@@ -134,20 +140,7 @@ public class GUI_Gamme extends javax.swing.JFrame {
         });
 
         labelTabGamme.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("Gamme sur instrument :");
-
-        cbInstrument.setModel(new javax.swing.DefaultComboBoxModel<>(Instrument.INTRUMENTS));
-        cbInstrument.setEnabled(false);
-
-        btInstrument.setText("Afficher");
-        btInstrument.setEnabled(false);
-        btInstrument.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btInstrumentActionPerformed(evt);
-            }
-        });
+        labelTabGamme.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jTableInstrument.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -241,9 +234,9 @@ public class GUI_Gamme extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
+                .addContainerGap(68, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83)
+                .addGap(65, 65, 65)
                 .addComponent(cbNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(102, 102, 102)
                 .addComponent(vertical_separator, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -270,18 +263,55 @@ public class GUI_Gamme extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("Sélectionner un instrument :");
+
+        cbInstrument.setModel(new javax.swing.DefaultComboBoxModel<>(Instrument.INTRUMENTS));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(191, 191, 191)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72)
+                .addComponent(cbInstrument, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbInstrument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
+        btInstrument.setText("Afficher");
+        btInstrument.setVisible(false);
+        btInstrument.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btInstrumentActionPerformed(evt);
+            }
+        });
+
+        lab_gamme_instrum.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lab_gamme_instrum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        cb_tunning.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cb_tunning.setVisible(false);
+
+        jLabel7.setVisible(false);
+        jLabel7.setText("Sélectionner un tunning :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(515, 515, 515)
-                .addComponent(btRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btRechercheNote, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(520, 520, 520))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(153, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,27 +319,41 @@ public class GUI_Gamme extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(209, 209, 209))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(cbInstrument, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(76, 76, 76)
-                        .addComponent(btInstrument)
-                        .addGap(385, 385, 385))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(33, 33, 33))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(labelTabGamme, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(285, 285, 285))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(horizontal_separator, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelInstrument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(139, 139, 139))))
+                            .addComponent(panelInstrument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(139, 139, 139))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btRechercheNote, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(542, 542, 542))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(369, 369, 369)
+                            .addComponent(labelTabGamme, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(429, 429, 429)
+                            .addComponent(lab_gamme_instrum, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(243, 243, 243)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(26, 26, 26)
+                            .addComponent(cb_tunning, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(132, 132, 132)
+                            .addComponent(btInstrument)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(516, 516, 516)
+                        .addComponent(btRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,28 +365,32 @@ public class GUI_Gamme extends javax.swing.JFrame {
                         .addComponent(jLabel2))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGap(18, 39, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(btRechercheNote, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(horizontal_separator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelTabGamme, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lab_gamme_instrum, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbInstrument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btInstrument))
-                .addGap(18, 18, Short.MAX_VALUE)
+                    .addComponent(btInstrument)
+                    .addComponent(cb_tunning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelInstrument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(46, 46, 46))
         );
 
         pack();
@@ -394,9 +442,19 @@ public class GUI_Gamme extends javax.swing.JFrame {
             NoteCellRenderer ncr = new NoteCellRenderer(noteInGamme, cellWidth, cellHeight);
             colonne.setCellRenderer(ncr);
         }
-           //activer cb instrument et bouton instrument
-           cbInstrument.setEnabled(true);
-           btInstrument.setEnabled(true);
+        //dessiner la gamme sur l'instrument
+        String instrument = (String) cbInstrument.getSelectedItem();
+        String tunning = "STANDARD";
+        Instrument i =draw_gamme(instrument, tunning);
+         //afficher bouton et combox tunning, si le tunning existe:
+        if(i.get_list_tunning()!=null){
+            cb_tunning.setVisible(true);
+            btInstrument.setVisible(true);
+            jLabel7.setVisible(true);
+            String[] liste=i.get_list_tunning();
+            //remplir la liste déroulante
+            cb_tunning.setModel(new javax.swing.DefaultComboBoxModel<>(liste));
+        }
 
     }//GEN-LAST:event_btRechercheNoteActionPerformed
 
@@ -426,22 +484,9 @@ public class GUI_Gamme extends javax.swing.JFrame {
     }//GEN-LAST:event_cbDieseActionPerformed
 
     private void btInstrumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInstrumentActionPerformed
-        String select = (String) cbInstrument.getSelectedItem();
-        String tunning = "STANDARD";
-        Instrument i=null;
-        switch (select) {
-            case "Guitare":
-                i = new Guitare(this.gamme, tunning);
-                
-                break;
-            case "Basse":
-                i = new Basse(this.gamme, tunning);
-                break;
-            default:
-                i=new Piano(this.gamme);
-        }
-        i.drawInstrumentGamme(jTableInstrument);
-        System.out.println(panelInstrument.getWidth());
+       String select = (String) cbInstrument.getSelectedItem();
+       String tunning = (String) cb_tunning.getSelectedItem();
+       draw_gamme(select, tunning);
     }//GEN-LAST:event_btInstrumentActionPerformed
     /**
      * fonction qui permet de modifier le contenu de la liste CbNotes en
@@ -455,7 +500,32 @@ public class GUI_Gamme extends javax.swing.JFrame {
         String[] listeNotes = Gamme.bases_mode(mode);
         return listeNotes;
     }
-
+    
+    
+    /**
+     * fonction qui dessine la gamme sur l'instrument selectionne
+     * @param instrument String : l'instrument selectionne
+     * @param tunning String :le tunning selectionne
+     */
+    public Instrument draw_gamme(String instrument, String tunning){
+        Instrument i=null;
+        switch (instrument) {
+            case "Guitare":
+                i = new Guitare(this.gamme, tunning);
+                break;
+            case "Basse":
+                i = new Basse(this.gamme, tunning);
+                break;
+            default:
+                i=new Piano(this.gamme);
+        }
+        //modifier le lab_gamme_instrum:
+        lab_gamme_instrum.setText("Gamme sur "+instrument);
+              
+        //dessiner la gamme sur l'instrument
+        i.drawInstrumentGamme(jTableInstrument);
+        return i;
+    }
     /**
      * @param args the command line arguments
      */
@@ -500,6 +570,7 @@ public class GUI_Gamme extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbInstrument;
     private javax.swing.JComboBox<String> cbMode;
     private javax.swing.JComboBox<String> cbNote;
+    private javax.swing.JComboBox<String> cb_tunning;
     private javax.swing.JSeparator horizontal_separator;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -507,11 +578,14 @@ public class GUI_Gamme extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableInstrument;
+    private javax.swing.JLabel lab_gamme_instrum;
     private javax.swing.JLabel labelTabGamme;
     private javax.swing.JPanel panelInstrument;
     private javax.swing.JTable tableauGamme;

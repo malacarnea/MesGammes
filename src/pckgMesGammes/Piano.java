@@ -46,6 +46,11 @@ class Piano extends Instrument {
         }
     }
 
+    @Override
+    public void set_tunning() {
+      this.tunning=null;
+    }
+
     
     
     @Override

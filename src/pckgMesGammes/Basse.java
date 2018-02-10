@@ -86,8 +86,9 @@ class Basse extends Instrument {
      */
     @Override
     public void init_instrum(String tunning) {
+        this.set_tunning();
         //on se base sur le tunning standard
-        String[] tunning_std = new StringBuilder(TUNNING_BASSE.get(tunning)).reverse().toString().split(" ");
+        String[] tunning_std = new StringBuilder(this.tunning.get(tunning)).reverse().toString().split(" ");
         //on cree un tableau de Note de longueur NB_FRETES_BASSE
         for (int l = 0; l < this.ligne_instrum; l++) {
             //on cree les notes pour une corde en fonction des notes du tunning
@@ -106,6 +107,11 @@ class Basse extends Instrument {
         this.instrument_cell_width=BASSE_CELL_WIDTH;
         this.instrument_cell_height=BASSE_CELL_HEIGHT;
         this.instrument_images=BASSE_IMAGES;
+    }
+
+    @Override
+    public void set_tunning() {
+       this.tunning=TUNNING_BASSE;
     }
 
    
