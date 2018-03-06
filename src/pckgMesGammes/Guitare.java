@@ -100,9 +100,10 @@ class Guitare extends Instrument {
     public void init_instrum(String tunning) {
         this.set_tunning();
         //on se base sur le tunning standard
-        String[] tunning_std = new StringBuilder(this.tunning.get(tunning)).reverse().toString().split(" ");
+        String[] tunning_std = new StringBuilder(this.tunning.get(tunning)).toString().split(" ");
         //on cree un tableau de Note de longueur NB_FRETES_GUITARE
-        for (int l = 0; l < this.ligne_instrum; l++) {
+        //parcours à l'envers pour afficher les notes dans le bon ordre
+        for (int l = this.ligne_instrum-1; l >=0 ; l--) {
             //on cree les notes pour une corde en fonction des notes du tunning
             Note base = new Note(tunning_std[l]);
             int i = 0;
@@ -138,7 +139,7 @@ class Guitare extends Instrument {
     public static void main(String args[]) {
 //        Gamme g = new Gamme("G", "MAJEUR");
 //        Piano p = new Piano(g);
-        Guitare g = new Guitare(new Gamme("G", "MAJEUR"),"STANDARD");
+        Guitare g = new Guitare(new Gamme("G", "MAJEUR"),"HALF_STEP_DOWN");
         
         System.out.println(g);
         System.out.println(g.getNoteGammeAtPos(4, 1));
