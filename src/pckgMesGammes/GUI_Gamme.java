@@ -51,7 +51,6 @@ public class GUI_Gamme extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableauGamme = new javax.swing.JTable();
-        btRetour = new javax.swing.JButton();
         labelTabGamme = new javax.swing.JLabel();
         panelInstrument = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -131,13 +130,6 @@ public class GUI_Gamme extends javax.swing.JFrame {
             tableauGamme.getColumnModel().getColumn(6).setHeaderValue("Degré VI");
             tableauGamme.getColumnModel().getColumn(7).setHeaderValue("Degré VII");
         }
-
-        btRetour.setText("Retour");
-        btRetour.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btRetourActionPerformed(evt);
-            }
-        });
 
         labelTabGamme.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labelTabGamme.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -337,23 +329,19 @@ public class GUI_Gamme extends javax.swing.JFrame {
                         .addGap(542, 542, 542))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(369, 369, 369)
-                            .addComponent(labelTabGamme, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(429, 429, 429)
-                            .addComponent(lab_gamme_instrum, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(243, 243, 243)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(26, 26, 26)
-                            .addComponent(cb_tunning, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(132, 132, 132)
-                            .addComponent(btInstrument)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(516, 516, 516)
-                        .addComponent(btRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(369, 369, 369)
+                        .addComponent(labelTabGamme, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(429, 429, 429)
+                        .addComponent(lab_gamme_instrum, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(243, 243, 243)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(cb_tunning, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(132, 132, 132)
+                        .addComponent(btInstrument)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -390,9 +378,7 @@ public class GUI_Gamme extends javax.swing.JFrame {
                         .addComponent(cb_tunning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelInstrument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addGap(87, 87, 87))
         );
 
         pack();
@@ -409,11 +395,6 @@ public class GUI_Gamme extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_cbNoteActionPerformed
-
-    private void btRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRetourActionPerformed
-        new MainMesGammes().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btRetourActionPerformed
 
     private void btRechercheNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRechercheNoteActionPerformed
         String note_select = (String) cbNote.getSelectedItem();
@@ -567,7 +548,6 @@ public class GUI_Gamme extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btInstrument;
     private javax.swing.JButton btRechercheNote;
-    private javax.swing.JButton btRetour;
     private javax.swing.JComboBox<String> cbDiese;
     private javax.swing.JComboBox<String> cbInstrument;
     private javax.swing.JComboBox<String> cbMode;
