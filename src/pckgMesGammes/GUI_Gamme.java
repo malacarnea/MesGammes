@@ -6,10 +6,10 @@
 package pckgMesGammes;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.Map.Entry;
-import javax.swing.ComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.table.TableColumn;
 
 /**
@@ -73,7 +73,9 @@ public class GUI_Gamme extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Mes Gammes");
         setBackground(null);
+        setIconImage(img);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Rechercher une gamme avec une note ou avec les dièses/bémols:");
@@ -544,7 +546,7 @@ public class GUI_Gamme extends javax.swing.JFrame {
             }
         });
     }
-
+    private Image img =(new ImageIcon(getClass().getResource("img/IconMesGammes.png"))).getImage();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btInstrument;
     private javax.swing.JButton btRechercheNote;
